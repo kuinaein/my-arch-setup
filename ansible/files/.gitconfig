@@ -1,0 +1,8 @@
+[user]
+  name = Kuina
+  email = kuinanein@gmail.com
+
+[core]
+  autocrlf = false
+  ignorecase = false
+  filemode = false

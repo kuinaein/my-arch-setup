@@ -1,0 +1,35 @@
+- hosts: local
+  become: yes
+  connection: local
+
+  pre_tasks:
+    - name: Chromiumをインストールする
+      package: name=chromium
+
+    - name: pamacのAURサポートを有効にする
+      lineinfile:
+        path: /etc/pamac.conf
+        line: '{{ item.line }}'
+        regexp: '{{ item.regexp }}'
+      with_items:
+        - line: EnableAUR
+          regexp: '#?EnableAUR'
+        - line: CheckAURUpdates
+          regexp: '#?CheckAURUpdates'
+
+    - name: 等幅フォントとしてNotoフォントを表示させる
+      copy:
+        dest: /etc/fonts/conf.d/51-font-alias.conf
+        src: files/51-font-alias.conf
+
+    - name: Mozcをインストールする
+      package: name=fcitx-mozc
+
+    - name: Visual Studio Codeをインストールする
+      become: no
+      aur: name=visual-studio-code-bin skip_installed=yes
+
+    - name: Git GUI用のtkをインストールする
+      package: name=tk
+
+# TODO WiFi settings

@@ -1,0 +1,6 @@
+local:
+  hosts:
+    localhost: {}
+  vars:
+    home_dir: '/home/{{ ansible_user }}'
+    aur_work_dir: '{{ home_dir }}/tmp/setup-aur'
