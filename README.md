@@ -1,10 +1,11 @@
-# 個人用の Antergos 環境セットアップスクリプト
+# 個人用の環境セットアップスクリプト
 
-## 手順
+## Antergos
 
 1. sudo .pre-setup.sh
 1. 再ログイン
 1. ./call-ansible.sh
+1. Chromium にログイン
 
 ## ライセンス
 

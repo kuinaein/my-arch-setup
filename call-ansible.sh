@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 set -eux
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
+source $SCRIPT_DIR/common.sh
 
 pushd $SCRIPT_DIR/ansible
 trap 'popd' EXIT
 
+# --ask-become-pass でパスワードを確認されるため、強調表示する
+change_console_color
 ansible-playbook -i arch-hosts.yml arch-setup.yml --ask-become-pass
-ansible-playbook -i arch-hosts.yml arch-user-settings.yml
+ansible-playbook -i arch-hosts.yml arch-user-prefs.yml
 
-echo Press enter to continue...
+echo_info Press enter to continue...
 read

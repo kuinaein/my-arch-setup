@@ -1,0 +1,46 @@
+- hosts: local
+  become: no
+  connection: local
+
+  pre_tasks:
+    - name: .xprofileを設定する
+      copy:
+        dest: '{{ home_dir }}/.xprofile'
+        src: .xprofile
+
+    - name: IME切り替えキーを「全角/半角」のみにする
+      lineinfile:
+        path: '{{ home_dir }}/.config/fcitx/config'
+        regexp: ^TriggerKey=
+        line: TriggerKey=ZENKAKUHANKAKU
+
+    - name: MATEパネルの設定を行う
+      dconf: key={{ item.key }} value={{ item.value }}
+      with_items:
+        # 右寄せ有効だとウィンドウ一覧が隠れる
+        - key: /org/mate/panel/objects/clock/panel-right-stick
+          value: 'false'
+        - key: /org/mate/panel/objects/clock/position
+          value: '640'
+        - key: /org/mate/panel/objects/notification-area/panel-right-stick
+          value: 'false'
+        - key: /org/mate/panel/objects/notification-area/position
+          value: '440'
+        - key: /org/mate/panel/toplevels/bottom/orientation
+          value: "'right'"
+
+    - name: MATEメニューを設定する
+      copy:
+        dest: '{{ home_dir }}/.linuxmint/mintMenu/applications.list'
+        src: mate-applications.list
+
+    - name: Cajaの設定を行う
+      dconf: key={{ item.key }} value={{ item.value }}
+      with_items:
+        - key: /org/mate/caja/preferences/show-hidden-files
+          value: 'true'
+        - key: /org/mate/caja/preferences/default-folder-viewer
+          value: "'list-view'"
+
+  roles:
+    - devtools-prefs

@@ -2,9 +2,12 @@
   become: yes
   connection: local
 
-  pre_tasks:
+  tasks:
     - name: Chromiumをインストールする
-      package: name=chromium
+      package: name={{ item }}
+      with_items:
+        - chromium
+        - pepper-flash
 
     - name: pamacのAURサポートを有効にする
       lineinfile:
@@ -20,7 +23,7 @@
     - name: 等幅フォントとしてNotoフォントを表示させる
       copy:
         dest: /etc/fonts/conf.d/51-font-alias.conf
-        src: files/51-font-alias.conf
+        src: 51-font-alias.conf
 
     - name: Mozcをインストールする
       package: name=fcitx-mozc
@@ -31,5 +34,9 @@
 
     - name: Git GUI用のtkをインストールする
       package: name=tk
+
+    - name: Powershellをインストールする
+      become: no
+      aur: name=powershell-bin skip_installed=yes
 
 # TODO WiFi settings

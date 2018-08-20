@@ -1,0 +1,6 @@
+{
+  "terminal.integrated.shell.linux": "/bin/pwsh",
+  "terminal.integrated.setLocaleVariables": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false
+}

@@ -1,0 +1,14 @@
+vscode_extensions:
+  - ms-ceintl.vscode-language-pack-ja
+  - editorconfig.editorconfig
+
+  # JavaScript
+  - esbenp.prettier-vscode
+
+  # bash
+  - shakram02.bash-beautify
+
+  # Ansible
+  - vscoss.vscode-ansible
+
+  - eamodio.gitlens
