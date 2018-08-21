@@ -1,0 +1,8 @@
+# Only for provisioning
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install pip
+      package: name=python-pip
+    - name: Install pywinrm
+      pip: name=pywinrm

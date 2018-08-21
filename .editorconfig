@@ -8,3 +8,15 @@ tab_width = 4
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.{bat,ps1}]
+# .editorconfigの仕様上、シフトJISは指定できない
+charset = utf-8
+# ISEの仕様に合わせる
+indent_size = 4
+end_of_line = crlf
+
+[{ansible/win-*,win-vagrant/*}]
+# 何かあったときにメモ帳で読めないと辛いので
+charset = latin1
+end_of_line = crlf

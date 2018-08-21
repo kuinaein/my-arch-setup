@@ -1,0 +1,30 @@
+- hosts: local
+  vars:
+    scoop_dir: '{{ ansible_env.USERPROFILE }}\scoop'
+  tasks:
+    - name: Download Google Chrome
+      win_get_url:
+        dest: C:\work\dl\googlechromestandaloneenterprise64.msi
+        url: https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BCEF33259-5343-FEED-89F8-CC60F80091E5%7D%26lang%3Den%26browser%3D5%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dtrue%26ap%3Dx64-stable-statsdef_1%26brand%3DGCEA/dl/chrome/install/googlechromestandaloneenterprise64.msi
+        force: no
+
+    - name: Install Google Chrome
+      win_package:
+        path: C:\work\dl\googlechromestandaloneenterprise64.msi
+        arguments: /quiet /norestart
+        creates_path: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+    - name: Install Git
+      win_shell: scoop install git
+      args:
+        creates: '{{ scoop_dir }}\shims\git.exe'
+
+    - name: Add scoop bucket "extras"
+      win_shell: scoop bucket add extras
+      args:
+        creates: '{{ scoop_dir }}\buckets\extras'
+
+    - name: Install Visual Studio Code
+      win_shell: scoop install vscode-portable
+      args:
+        creates: '{{ scoop_dir }}\shims\code.exe'

@@ -1,2 +1,6 @@
+*.log
+.vagrant/
 ansible/*.retry
 nohup.out
+
+note.txt

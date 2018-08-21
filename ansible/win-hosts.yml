@@ -1,0 +1,8 @@
+local:
+  hosts:
+    '192.168.85.162': {}
+  vars:
+    ansible_connection: winrm
+    ansible_winrm_server_cert_validation: ignore
+
+    home_dir: /home/{{ ansible_user }}
