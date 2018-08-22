@@ -21,8 +21,15 @@ $MySetup.InvokeMain( {
             vagrant up;
             $ansible = "ansible-playbook -v -i /mnt/ansible/win-hosts.yml -u {0} -e 'ansible_ssh_pass={1}' " `
                 -f $user, $pass;
-            vagrant ssh -c ($ansible + '/mnt/ansible/win-setup.yml');
-            vagrant ssh -c ($ansible + '/mnt/ansible/win-user-prefs.yml');
+
+            Get-Date | Add-Content -Path ($PSScriptRoot + '\setup.log');
+            vagrant ssh -c ($ansible + '/mnt/ansible/win-setup.yml') | `
+                Add-Content -Path ($PSScriptRoot + '\setup.log') -PassThru;
+
+            Get-Date | Add-Content -Path ($PSScriptRoot + '\user-pregs.log');
+            vagrant ssh -c ($ansible + '/mnt/ansible/win-user-prefs.yml') | `
+                Add-Content -Path ($PSScriptRoot + '\user-prefs.log') -PassThru;
+
             if (! $noHalt) {
                 vagrant halt;
             }
