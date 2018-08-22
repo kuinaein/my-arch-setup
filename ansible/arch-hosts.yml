@@ -1,6 +1,0 @@
-arch:
-  hosts:
-    localhost: {}
-  vars:
-    home_dir: /home/{{ ansible_user }}
-    user_config_dir: '{{ home_dir }}/.config'

@@ -4,7 +4,9 @@
 
 1. sudo .pre-setup.sh
 1. 再ログイン
+1. すとれりちあ様のインスタンスを起動
 1. ./call-ansible.sh
+1. すとれりちあ様のインスタンスを停止
 1. Chromium にログイン
 
 ## Windows
@@ -13,8 +15,10 @@
 1. pre-setup.bat
 1. 管理者権限で pre-setup.ps1
 1. user-pre-setup.ps1
+1. すとれりちあ様のインスタンスを起動
 1. call-ansible.ps1
-1. Chromium にログイン
+1. すとれりちあ様のインスタンスを停止
+1. Google Chrome にログイン
 
 ## ライセンス
 

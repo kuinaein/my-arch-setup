@@ -19,7 +19,7 @@ $MySetup.InvokeMain( {
         Push-Location ($PSScriptRoot + '\win-vagrant');
         try {
             vagrant up;
-            $ansible = "ansible-playbook -v -i /mnt/ansible/win-hosts.yml -u {0} -e 'ansible_ssh_pass={1}' " `
+            $ansible = "ansible-playbook -v -l win -i /mnt/ansible/hosts.yml -u {0} -e 'ansible_ssh_pass={1}' " `
                 -f $user, $pass;
 
             Get-Date | Add-Content -Path ($PSScriptRoot + '\setup.log');

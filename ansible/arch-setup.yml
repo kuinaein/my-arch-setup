@@ -28,14 +28,25 @@
     - name: Mozcをインストールする
       package: name=fcitx-mozc
 
-    - name: Visual Studio Codeをインストールする
-      become: no
-      aur: name=visual-studio-code-bin skip_installed=yes
-
     - name: Git GUI用のtkをインストールする
       package: name=tk
 
-    - name: Powershellをインストールする
+    - aur: name={{ item }} skip_installed=yes
       become: no
-      aur: name=powershell-bin skip_installed=yes
-  # TODO WiFi settings
+      with_items:
+        - visual-studio-code-bin
+        - powershell-bin
+
+    - package: name={{ item }}
+      with_items:
+        - yarn
+        - composer
+        - php-pgsql
+        - xdebug
+
+    - name: phpのPDO拡張(PostgreSQL)を有効にする
+      lineinfile:
+        path: /etc/php/php.ini
+        regexp: ^;?extension=pdo_pgsql
+        line: extension=pdo_pgsql
+    # TODO WiFi設定

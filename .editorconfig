@@ -20,8 +20,8 @@ charset = latin1
 end_of_line = crlf
 
 # 何かあったときにメモ帳で読めないと辛いので
-[{ansible/**/win-*,win-vagrant/*}]
+[ansible/**/win{-*,}.yml]
 end_of_line = crlf
 
-[.editorconfig]
+[win-vagrant/*]
 end_of_line = crlf

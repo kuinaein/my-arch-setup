@@ -1,0 +1,6 @@
+home_dir: '{{ ansible_env.USERPROFILE }}'
+user_bin_dir: C:\bin
+user_config_dir: '{{ home_dir }}/AppData/Roaming'
+
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore

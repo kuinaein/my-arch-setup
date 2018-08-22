@@ -15,13 +15,14 @@ fi
 pushd $SCRIPT_DIR/ansible
 trap 'popd' EXIT
 
+ANSIBLE_PB='ansible-playbook -v -l arch -i hosts.yml'
+
 date >> $SCRIPT_DIR/setup.log;
-ansible-playbook -v -i arch-hosts.yml arch-setup.yml -e ansible_sudo_pass=$ANSIBLE_SUDO_PASS | \
+$ANSIBLE_PB arch-setup.yml -e ansible_sudo_pass=$ANSIBLE_SUDO_PASS | \
 tee -a $SCRIPT_DIR/setup.log
 
 date >> $SCRIPT_DIR/user-prefs.log;
-ansible-playbook -v -i arch-hosts.yml arch-user-prefs.yml | \
-tee -a $SCRIPT_DIR/user-prefs.log
+$ANSIBLE_PB arch-user-prefs.yml | tee -a $SCRIPT_DIR/user-prefs.log
 
 echo_info Press enter to continue...
 read

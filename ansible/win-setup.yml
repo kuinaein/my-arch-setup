@@ -25,7 +25,11 @@
       args:
         creates: '{{ scoop_dir }}\buckets\extras'
 
-    - name: Visual Studio Codeをインストールする
-      win_shell: scoop install vscode
+    - win_shell: scoop install {{ item }}
       args:
-        creates: '{{ scoop_dir }}\apps\vscode'
+        creates: '{{ scoop_dir }}\apps\{{ item }}'
+      with_items:
+        - vscode
+        - yarn
+        - composer
+        - php-xdebug
