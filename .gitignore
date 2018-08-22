@@ -1,3 +1,4 @@
+.env
 *.log
 .vagrant/
 ansible/*.retry

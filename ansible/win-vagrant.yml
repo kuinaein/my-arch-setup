@@ -1,8 +1,8 @@
-# Only for provisioning
+# Vagrant仮想マシン内のプロビジョニングのみ
 - hosts: all
   become: yes
   tasks:
-    - name: Install pip
+    - name: pipをインストールする
       package: name=python-pip
-    - name: Install pywinrm
+    - name: pywinrmをインストールする
       pip: name=pywinrm

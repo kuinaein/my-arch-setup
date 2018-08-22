@@ -1,26 +1,18 @@
-Set-PSDebug -Strict -Trace 1;
-$ErrorActionPreference='Stop';
-try {
+﻿$script:ErrorActionPreference='Stop';
+Remove-Module 'Kuina.MySetup' -ErrorAction 'Continue' 2>&1 | Out-Null;
+Import-Module ($PSScriptRoot + '\ps-module\Kuina.MySetup') -Scope Local;
+$MySetup.InvokeMain({
+    if (!(cmd /c where scoop)) {
+        $MySetup.EchoInfo('scoopをインストールします...');
+        $MySetup.InvokeWithNoDebug({
+            iex (new-object net.webclient).downloadstring('https://get.scoop.sh');
+        }.GetNewClosure());
+    }
 
-. ($PSScriptRoot + '\common.ps1');
-
-
-if (!(cmd /c where scoop)) {
-    Echo-Info 'Install Scoop...';
-    iex (new-object net.webclient).downloadstring('https://get.scoop.sh');
-}
-
-if (!(cmd /c where vagrant)) {
-    Echo-Info 'Install Vagrant...';
-    Set-PSDebug -Trace 0;
-    scoop install vagrant;
-    Set-PSDebug -Trace 1;
-}
-
-
-Echo-Info 'Press Enter to continue...';
-Read-Host | Out-Null;
-
-} finally {
-    Set-PSDebug -Off;
-}
+    if (!(cmd /c where vagrant)) {
+        $MySetup.EchoInfo('Vagrantをインストールします...');
+        $MySetup.InvokeWithNoDebug({
+            scoop install vagrant;
+        }.GetNewClosure());
+    }
+}.GetNewClosure());
