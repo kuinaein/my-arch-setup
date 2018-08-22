@@ -1,18 +1,4 @@
-- name: Gitの設定を行う
-  copy:
-    dest: '{{ home_dir }}/.gitconfig'
-    src: .gitconfig
-
-- name: Visual Studio Code拡張をインストールする
-  shell: code --install-extension {{ item }}
-  args:
-    creates: '{{ home_dir }}/.vscode/extensions/{{ item }}-*'
-  with_items: '{{ vscode_extensions }}'
-
-- name: Visual Studio Codeの設定を行う
-  copy:
-    dest: '{{ home_dir }}/.config/Code/User/{{ item }}'
-    src: vscode-{{ item }}
-  with_items:
-    - locale.json
-    - settings.json
+- include: arch-main.yml
+  when: ansible_system != 'Win32NT'
+- include: win-main.yml
+  when: ansible_system == 'Win32NT'

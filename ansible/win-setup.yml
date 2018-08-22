@@ -1,8 +1,9 @@
-- hosts: local
+- hosts: all
   vars:
     scoop_dir: '{{ ansible_env.USERPROFILE }}\scoop'
+
   tasks:
-    - name: Google Chromeをインストールする
+    - name: Google Chromeをダウンロードする
       win_get_url:
         dest: C:\work\dl\googlechromestandaloneenterprise64.msi
         url: https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BCEF33259-5343-FEED-89F8-CC60F80091E5%7D%26lang%3Den%26browser%3D5%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dtrue%26ap%3Dx64-stable-statsdef_1%26brand%3DGCEA/dl/chrome/install/googlechromestandaloneenterprise64.msi
@@ -25,6 +26,6 @@
         creates: '{{ scoop_dir }}\buckets\extras'
 
     - name: Visual Studio Codeをインストールする
-      win_shell: scoop install vscode-portable
+      win_shell: scoop install vscode
       args:
         creates: '{{ scoop_dir }}\shims\code.cmd'

@@ -7,7 +7,7 @@
 # Import-Module -AsCustomObject
 # => aliasが取れない. コマンドレットではないので名前付き引数も使えなくなる
 
-$script:ErrorActionPreference='Stop';
+$script:ErrorActionPreference = 'Stop';
 
 class MySetup {
     # コンストラクタを書き忘れると謎のエラーが発生する

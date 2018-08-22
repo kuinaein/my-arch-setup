@@ -1,0 +1,26 @@
+- name: Gitの設定を行う
+  win_copy:
+    dest: '{{ home_dir }}/.gitconfig'
+    src: .gitconfig
+
+- name: Visual Studio Code拡張のインストール状況を確認する
+  win_find:
+    paths: '{{ home_dir }}/.vscode/extensions'
+    patterns: '{{ item }}-*'
+    file_type: directory
+  with_items: '{{ vscode_extensions }}'
+  changed_when: false
+  register: vscodeExt
+
+- name: Visual Studio Code拡張をインストールする
+  win_shell: code --install-extension {{ item.item }}
+  when: 0 == item.matched
+  with_items: '{{ vscodeExt.results }}'
+
+- name: Visual Studio Codeの設定を行う
+  win_copy:
+    dest: '{{ user_config_dir }}/Code/User/{{ item }}'
+    src: vscode-{{ item }}
+  with_items:
+    - locale.json
+    - settings.json

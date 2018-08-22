@@ -8,8 +8,8 @@ trap 'popd' EXIT
 
 # --ask-become-pass でパスワードを確認されるため、強調表示する
 change_console_color
-ansible-playbook -i arch-hosts.yml arch-setup.yml --ask-become-pass
-ansible-playbook -i arch-hosts.yml arch-user-prefs.yml
+ansible-playbook -v -i arch-hosts.yml arch-setup.yml --ask-become-pass
+ansible-playbook -v -i arch-hosts.yml arch-user-prefs.yml
 
 echo_info Press enter to continue...
 read
