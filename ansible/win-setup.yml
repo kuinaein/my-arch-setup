@@ -18,7 +18,7 @@
     - name: Gitをインストールする
       win_shell: scoop install git
       args:
-        creates: '{{ scoop_dir }}\shims\git.exe'
+        creates: '{{ scoop_dir }}\apps\git'
 
     - name: Scoop にバケット "extras" を登録する
       win_shell: scoop bucket add extras
@@ -28,4 +28,4 @@
     - name: Visual Studio Codeをインストールする
       win_shell: scoop install vscode
       args:
-        creates: '{{ scoop_dir }}\shims\code.cmd'
+        creates: '{{ scoop_dir }}\apps\vscode'
