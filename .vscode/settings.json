@@ -1,6 +1,5 @@
 {
   "editor.formatOnSave": true,
   "prettier.singleQuote": true,
-  "bashBeautify.tabSize": 2,
-  "powershell.codeFormatting.preset": "OTBS"
+  "bashBeautify.tabSize": 2
 }
