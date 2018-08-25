@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-set -eux
-set -o pipefail
+set -eux -o pipefail
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 source $SCRIPT_DIR/common.sh
 
@@ -12,8 +11,8 @@ else
   echo ANSIBLE_SUDO_PASS=$ANSIBLE_SUDO_PASS >> .env
 fi
 
-pushd $SCRIPT_DIR/ansible
-trap 'popd' EXIT
+pushd $SCRIPT_DIR/../ansible >/dev/null
+trap 'popd >/dev/null' EXIT
 
 ANSIBLE_PB='ansible-playbook -v -l arch -i hosts.yml'
 

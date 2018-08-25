@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-set -eux
-set -o pipefail
+set -eux -o pipefail
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 source $SCRIPT_DIR/common.sh
 
@@ -13,7 +12,8 @@ AUR_DIR=/home/$SUDO_USER/tmp/aur
 
 
 function main () {
-  pacman -Sy --needed --noconfirm ansible git noto-fonts-cjk
+  pacman -Syy
+  pacman -S --needed --noconfirm ansible git noto-fonts-cjk
   # 180820:
   # antergosをインストールしたあと
   # Notoフォントが入っていなかったので日本語を表示できなかった
@@ -34,8 +34,8 @@ function install_from_aur () {
   if [ ! -d "$AUR_DIR" ]; then
     sudo -u $SUDO_USER mkdir -p "$AUR_DIR"
   fi
-  pushd "$AUR_DIR"
-  trap "popd" RETURN
+  pushd "$AUR_DIR" >/dev/null
+  trap "popd >/dev/null" RETURN
 
   if [ -d "$pkg" ]; then
     rm -rf "$pkg"
