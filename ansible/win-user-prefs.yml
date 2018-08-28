@@ -18,7 +18,45 @@
 
     - name: Arch Linux デフォルトログインユーザーを変更する ※反映にはWindows側で再ログインが必要
       win_shell: Arch config --default-uid {{ arch_uid.stdout }}
-      when: arch_default_uid.stdout != arch_uid.stdout
+      when: arch_default_uid.stdout_lines[0] != arch_uid.stdout_lines[0]
+
+    - name: エクスプローラの設定を変更する
+      win_regedit:
+        path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+        name: '{{ item.name }}'
+        data: '{{ item.data }}'
+        type: dword
+      with_items:
+        - name: ShowTaskViewButton
+          data: 0
+        - name: NavPaneExpandToCurrentFolder
+          data: 1
+        - name: HideFileExt
+          data: 0
+        - name: Hidden
+          data: 1
+        # 空のドライブも表示させる
+        - name: HideDrivesWithNoMedia
+          data: 0
+        # 保護されたオペレーティングシステムファイルも表示させる
+        - name: ShowSuperHidden
+          data: 1
+        # コントロールパネル等も表示させる
+        - name: NavPaneShowAllFolders
+          data: 1
+        # チェックボックスを表示させる
+        - name: AutoCheckSelect
+          data: 1
+        # 初期表示フォルダをPCにする
+        - name: LaunchTo
+          data: 1
+
+    - name: タスクバーからPeopleを消す
+      win_regedit:
+        path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
+        name: PeopleBand
+        data: 0
+        type: dword
 
   roles:
     - devtools-prefs

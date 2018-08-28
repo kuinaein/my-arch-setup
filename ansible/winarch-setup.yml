@@ -2,9 +2,6 @@
   become: yes
   connection: local
   pre_tasks:
-    #   - group_by: key=winarch
-    #     changed_when: false
-
     - name: パスワード生成
       shell: openssl passwd -1 {{ arch_user }}
       register: passwd
