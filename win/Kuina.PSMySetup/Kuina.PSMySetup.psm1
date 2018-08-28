@@ -13,7 +13,7 @@ Set-StrictMode -Version Latest;
 
 
 Set-Variable -Scope Script -Option ReadOnly `
-    -Name ARCH_EXE -Value 'C:\bin\archlinux\Arch.exe';
+    -Name ARCH_EXE -Value (Join-Path -Path $env:USERPROFILE -ChildPath 'scoop\shims\arch.ps1');
 Set-Variable -Scope Script -Option ReadOnly `
     -Name KN_BIN_DIR -Value 'C:\bin';
 Set-Variable -Scope Script -Option ReadOnly `

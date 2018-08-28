@@ -1,8 +1,11 @@
 - hosts: all
-  vars:
-    scoop_dir: '{{ ansible_env.USERPROFILE }}\scoop'
 
-  tasks:
+  connection: winrm
+
+  pre_tasks:
+    - group_by: key=win
+      changed_when: false
+
     - name: Google Chromeをダウンロードする
       win_get_url:
         dest: C:\work\dl\googlechromestandaloneenterprise64.msi

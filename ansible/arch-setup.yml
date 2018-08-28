@@ -3,6 +3,9 @@
   connection: local
 
   pre_tasks:
+    - group_by: key=arch
+      changed_when: false
+
     - name: Chromiumをインストールする
       package: name={{ item }}
       with_items:

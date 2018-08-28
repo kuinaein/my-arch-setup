@@ -1,3 +1,24 @@
 - hosts: all
+
+  connection: winrm
+
+  pre_tasks:
+    - group_by: key=win
+      changed_when: false
+
+    - name: Arch LinuxでのユーザーIDを取得する
+      win_shell: Arch run id --user {{ ansible_env.USERNAME }}
+      register: arch_uid
+      changed_when: false
+
+    - name: Arch Linux デフォルトログインユーザーを確認する
+      win_shell: Arch get --default-uid
+      register: arch_default_uid
+      changed_when: false
+
+    - name: Arch Linux デフォルトログインユーザーを変更する ※反映にはWindows側で再ログインが必要
+      win_shell: Arch config --default-uid {{ arch_uid.stdout }}
+      when: arch_default_uid.stdout != arch_uid.stdout
+
   roles:
     - devtools-prefs

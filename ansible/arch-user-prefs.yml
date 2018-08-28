@@ -3,6 +3,9 @@
   connection: local
 
   pre_tasks:
+    - group_by: key=arch
+      changed_when: false
+
     - name: .xprofileを設定する
       copy:
         dest: '{{ home_dir }}/.xprofile'
