@@ -1,0 +1,34 @@
+- win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - vscode
+    # - powershell-bin
+
+- name: Yarnのインストール
+  win_shell: scoop install yarn
+  args:
+    creates: '{{ scoop_dir }}\apps\yarn'
+
+- name: PHP開発ツールのインストール
+  win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - composer
+    # - php-pgsql
+    - xdebug
+
+# TODO
+# - name: Python開発ツールのインストール
+#   package: name={{ item }}
+#   with_items:
+#     - python-pipenv
+#     - python-pylint
+#     - autopep8
+
+# - name: phpのPDO拡張(PostgreSQL)を有効にする
+#   lineinfile:
+#     path: /etc/php/php.ini
+#     regexp: ^;?extension=pdo_pgsql
+#     line: extension=pdo_pgsql

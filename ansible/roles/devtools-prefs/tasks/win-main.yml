@@ -24,3 +24,11 @@
   with_items:
     - locale.json
     - settings.json
+
+- name: Powershellの設定フォルダを作成する
+  win_file: state=directory path={{ home_dir }}/Documents/WindowsPowerShell
+
+- name: PowerShellのprofile.ps1を設定する
+  win_template:
+    dest: '{{ home_dir }}/Documents/WindowsPowerShell/profile.ps1'
+    src: profile.j2.ps1

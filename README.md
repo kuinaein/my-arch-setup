@@ -22,5 +22,7 @@
 
 そんなものありません。
 
-CC0<br/>
-https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+Unlicense、CC0 とパブリックドメインのトリプルライセンスとします
+
+- Uniicense http://unlicense.org
+- CC0 https://creativecommons.org/publicdomain/zero/1.0/deed.ja
