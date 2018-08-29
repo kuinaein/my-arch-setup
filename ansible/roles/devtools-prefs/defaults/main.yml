@@ -12,8 +12,10 @@ vscode_extensions:
   - shakram02.bash-beautify
   # PowerShell
   - ms-vscode.powershell
-
   # Ansible
   - vscoss.vscode-ansible
+
+  # C#
+  - ms-vscode.csharp
 
   - eamodio.gitlens

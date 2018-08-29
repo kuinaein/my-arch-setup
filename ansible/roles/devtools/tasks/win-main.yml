@@ -19,7 +19,13 @@
     # - php-pgsql
     - xdebug
 
-# TODO
+# - name: phpのPDO拡張(PostgreSQL)を有効にする
+#   lineinfile:
+#     path: /etc/php/php.ini
+#     regexp: ^;?extension=pdo_pgsql
+#     line: extension=pdo_pgsql
+
+# TODO pip で入れるのが妥当か？
 # - name: Python開発ツールのインストール
 #   package: name={{ item }}
 #   with_items:
@@ -27,8 +33,13 @@
 #     - python-pylint
 #     - autopep8
 
-# - name: phpのPDO拡張(PostgreSQL)を有効にする
-#   lineinfile:
-#     path: /etc/php/php.ini
-#     regexp: ^;?extension=pdo_pgsql
-#     line: extension=pdo_pgsql
+- name: C#開発ツールのインストール
+  package: name={{ item }}
+  with_items:
+    # - mono
+    - dotonet-sdk
+    # - dotonet-host
+
+# - name: msbuildのインストール
+#   aur: name=msbuild-stab;e skip_installed=yes
+#   become: no

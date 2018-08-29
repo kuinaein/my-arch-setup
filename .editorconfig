@@ -23,8 +23,5 @@ end_of_line = crlf
 [ansible/**/win{-*,}.yml]
 end_of_line = crlf
 
-[win-vagrant/*]
-end_of_line = crlf
-
 [{README.md, LICENSE}]
 end_of_line = crlf
