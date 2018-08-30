@@ -19,7 +19,7 @@
 
 - name: Visual Studio Codeの設定を行う
   copy:
-    dest: '{{ user_config_dir }}/Code/User/{{ item }}'
+    dest: '{{ home_dir }}/.config/Code/User/{{ item }}'
     src: vscode-{{ item }}
   with_items:
     - locale.json

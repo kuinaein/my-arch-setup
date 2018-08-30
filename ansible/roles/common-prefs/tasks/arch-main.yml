@@ -1,0 +1,10 @@
+- name: SSHキーをコピーする
+  copy:
+    dest: '{{ home_dir }}/.ssh/{{ item.filename }}'
+    src: '{{ cred_dir }}/files/{{ item.filename }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - filename: id_rsa
+      mode: '600'
+    - filename: id_rsa.pub
+      mode: '644'

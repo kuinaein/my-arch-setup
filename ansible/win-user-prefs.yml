@@ -59,4 +59,6 @@
         type: dword
 
   roles:
+    - common-prefs
     - devtools-prefs
+    # - strelitzia

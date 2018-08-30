@@ -6,10 +6,12 @@
     - group_by: key=arch
       changed_when: false
 
-    - name: .xprofileを設定する
-      copy:
-        dest: '{{ home_dir }}/.xprofile'
-        src: .xprofile
+    - copy:
+        dest: '{{ home_dir }}/{{ item }}'
+        src: '{{ item }}'
+      with_items:
+        - .bashrc
+        - .xprofile
 
     - name: IME切り替えキーを「全角/半角」のみにする
       lineinfile:
@@ -46,5 +48,6 @@
           value: "'list-view'"
 
   roles:
+    - common-prefs
     - devtools-prefs
     - strelitzia

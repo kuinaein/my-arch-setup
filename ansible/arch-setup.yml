@@ -12,6 +12,9 @@
         - chromium
         - pepper-flash
 
+    - name: Neovimをインストールする
+      package: name=neovim
+
     - name: pamacのAURサポートを有効にする
       lineinfile:
         path: /etc/pamac.conf

@@ -5,6 +5,15 @@
     - vscode
     # - powershell-bin
 
+- name: Powershellのヘルプを更新する
+  win_shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
+  # args:
+  #   executable: /usr/bin/pwsh
+  with_items:
+    - ja-JP
+    - en-US
+  failed_when: false
+
 - name: Yarnのインストール
   win_shell: scoop install yarn
   args:

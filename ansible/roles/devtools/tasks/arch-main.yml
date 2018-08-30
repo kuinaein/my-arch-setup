@@ -5,6 +5,15 @@
     - visual-studio-code-bin
     - powershell-bin
 
+- name: Powershellのヘルプを更新する
+  shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
+  args:
+    executable: /usr/bin/pwsh
+  with_items:
+    - ja-JP
+    - en-US
+  failed_when: false
+
 - name: Yarnのインストール
   package: name=yarn
   #
@@ -37,8 +46,8 @@
   package: name={{ item }}
   with_items:
     - mono
-    - dotonet-sdk
-    - dotonet-host
+    - dotnet-sdk
+    - dotnet-host
 
 - name: msbuildのインストール
   aur: name=msbuild-stable skip_installed=yes
