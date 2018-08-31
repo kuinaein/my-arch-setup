@@ -4,8 +4,8 @@ $script:ErrorActionPreference = 'Stop';
 
 function prompt() {
     $local:ErrorActionPreference = 'SilentlyContinue';
-    $branch = git rev-parse --abbrev-ref HEAD 2>/dev/null;
-    if ($branch) {
+    $branch = git rev-parse --abbrev-ref HEAD 2>$null;
+    if ($null -ne $branch) {
         "PS {0} [$branch]>" -f (Get-Location);
     }
     else {

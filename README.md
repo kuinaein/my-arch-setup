@@ -22,7 +22,7 @@
 
 そんなものありません。
 
-Unlicense、CC0 とパブリックドメインのトリプルライセンスとします
+パブリックドメイン、CC0 と Unlicense のトリプルライセンスとします。
 
-- Uniicense http://unlicense.org
+- Unlicense http://unlicense.org
 - CC0 https://creativecommons.org/publicdomain/zero/1.0/deed.ja
