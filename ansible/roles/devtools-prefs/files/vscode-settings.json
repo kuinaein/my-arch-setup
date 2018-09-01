@@ -1,10 +1,10 @@
 {
   "workbench.colorTheme": "Japanesque Dark",
-  "terminal.integrated.shell.linux": "/bin/pwsh",
+  "terminal.integrated.shell.linux": "/usr/bin/env",
+  "terminal.integrated.shellArgs.linux": ["TERM=xterm", "/usr/bin/pwsh"],
   "terminal.integrated.setLocaleVariables": true,
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.enabled": false,
-  "editor.tabSize": 2,
   "prettier.eslintIntegration": true,
   "prettier.singleQuote": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript"],

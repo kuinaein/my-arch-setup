@@ -12,7 +12,7 @@ alias grep='grep --color=auto'
 function parse_git_branch() {
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
   if [ "" != "$branch" ]; then
-    echo -e " \e[32m($branch)\e[m"
+    echo -e " (\e[32m$branch\e[m)"
   fi
 }
 

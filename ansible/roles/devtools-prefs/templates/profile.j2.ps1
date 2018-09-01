@@ -6,7 +6,7 @@ function prompt() {
     $local:ErrorActionPreference = 'SilentlyContinue';
     $branch = git rev-parse --abbrev-ref HEAD 2>$null;
     if ($null -ne $branch) {
-        "PS {0} [$branch]>" -f (Get-Location);
+        "PS {0} [`e[32m$branch`e[m]`n>" -f (Get-Location);
     }
     else {
         "PS {0}>" -f (Get-Location);
