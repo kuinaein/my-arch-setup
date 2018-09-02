@@ -14,10 +14,17 @@
     - en-US
   failed_when: false
 
-- name: Yarnのインストール
-  package: name=yarn
-  #
-  #
+- package: name={{ item }}
+  # args:
+  #   creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - jq
+    - yarn
+    - java-runtime
+    - dotnet-sdk
+    - dotnet-host
+    - graphviz
+    - docker-compose
 
 - name: PHP開発ツールのインストール
   package: name={{ item }}
@@ -34,9 +41,6 @@
     regexp: ^;?extension=pdo_pgsql
     line: extension=pdo_pgsql
 
-- name: Dockerのインストール
-  package: name=docker-compose
-
 #
 - name: Python開発ツールのインストール
   package: name={{ item }}
@@ -44,20 +48,3 @@
     - python-pipenv
     - python-pylint
     - autopep8
-
-- name: C#開発ツールのインストール
-  package: name={{ item }}
-  with_items:
-    - mono
-    - dotnet-sdk
-    - dotnet-host
-
-- name: msbuildのインストール
-  aur: name=msbuild-stable skip_installed=yes
-  become: no
-
-- name: Javaランタイムのインストール
-  package: name=java-runtime
-
-- name: Graphvizのインストール
-  package: name=graphviz

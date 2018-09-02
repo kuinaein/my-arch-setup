@@ -23,10 +23,13 @@
       args:
         creates: '{{ scoop_dir }}\apps\git'
 
-    - name: Scoop にバケット "extras" を登録する
+    - name: Scoop にバケットを登録する
       win_shell: scoop bucket add extras
       args:
-        creates: '{{ scoop_dir }}\buckets\extras'
+        creates: '{{ scoop_dir }}\buckets\{{ item }}'
+      with_items:
+        - extras
+        - java
 
   roles:
     - devtools
