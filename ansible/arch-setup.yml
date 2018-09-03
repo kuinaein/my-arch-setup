@@ -32,7 +32,10 @@
         src: 51-font-alias.conf
 
     - name: Mozcをインストールする
-      package: name=fcitx-mozc
+      package: name={{ item }}
+      with_items:
+        - fcitx-mozc
+        - fcitx-configtool
 
     - name: Git GUI用のtkをインストールする
       package: name=tk

@@ -13,11 +13,18 @@
         - .bashrc
         - .xprofile
 
-    - name: IME切り替えキーを「全角/半角」のみにする
+    - name: fcitxの設定を行う
       lineinfile:
-        path: '{{ home_dir }}/.config/fcitx/config'
-        regexp: ^TriggerKey=
-        line: TriggerKey=ZENKAKUHANKAKU
+        path: '{{ home_dir }}/.config/fcitx/{{ item.subpath }}'
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      with_items:
+        - subpath: config
+          regexp: ^TriggerKey=
+          line: TriggerKey=ZENKAKUHANKAKU
+        - subpath: conf/fcitx-clipboard.config
+          regexp: ^#?HistoryLength=5
+          line: HistoryLength=16
 
     - name: MATEパネルの設定を行う
       dconf: key={{ item.key }} value={{ item.value }}
