@@ -1,5 +1,12 @@
 {
   "editor.formatOnSave": true,
+
   "prettier.singleQuote": true,
-  "bashBeautify.tabSize": 2
+  "prettier.bracketSpacing": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+  "bashBeautify.tabSize": 2,
+
+  "files.associations": {
+    "vscode-*.json": "jsonc"
+  }
 }

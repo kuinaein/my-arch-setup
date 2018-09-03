@@ -1,13 +1,27 @@
 {
+  // 全体設定
   "workbench.colorTheme": "Japanesque Dark",
   "terminal.integrated.shell.linux": "/usr/bin/env",
   "terminal.integrated.shellArgs.linux": ["TERM=xterm", "/usr/bin/pwsh"],
   "terminal.integrated.setLocaleVariables": true,
+
+  "bashBeautify.tabSize": 2,
+
+  // Git
   "gitlens.currentLine.enabled": false,
   "gitlens.codeLens.enabled": false,
+  "files.exclude": {
+    "**/.git": false
+  },
+
+  // Javascript
+  "eslint.validate": ["javascript", "javascriptreact", "typescript"],
   "prettier.eslintIntegration": true,
   "prettier.singleQuote": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript"],
+  // 波かっこの前後にスペースを入れない
+  "prettier.bracketSpacing": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+
   "files.associations": {
     "*.gs": "javascript"
   }

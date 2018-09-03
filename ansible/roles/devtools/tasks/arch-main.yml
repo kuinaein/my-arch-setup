@@ -20,9 +20,9 @@
   with_items:
     - jq
     - yarn
-    - java-runtime
     - dotnet-sdk
     - dotnet-host
+    - java-runtime
     - graphviz
     - docker-compose
 

@@ -20,9 +20,9 @@
   with_items:
     - jq
     - yarn
-    - openjdk
     - dotonet-sdk
     # - dotonet-host
+    - openjdk
     - graphviz
     # - docker-compose
 
