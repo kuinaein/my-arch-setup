@@ -26,6 +26,14 @@
           regexp: ^#?HistoryLength=5
           line: HistoryLength=16
 
+    - name: MATEをダークテーマにする
+      dconf: key={{ item.key }} value={{ item.value }}
+      with_items:
+        - key: /org/mate/desktop/interface/gtk-theme
+          value: "'BlackMATE'"
+        - key: /org/mate/macro/general/theme
+          value: "'Green-Submarine'"
+
     - name: MATEパネルの設定を行う
       dconf: key={{ item.key }} value={{ item.value }}
       with_items:
