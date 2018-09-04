@@ -19,11 +19,14 @@
     creates: '{{ scoop_dir }}\apps\{{ item }}'
   with_items:
     - jq
+    - nodejs-lts
     - yarn
-    - dotonet-sdk
-    # - dotonet-host
+    - python
+    - dotnet-sdk
+    # - dotnet-host
     - openjdk
     - graphviz
+    - vagrant
     # - docker-compose
 
 - name: PHP開発ツールのインストール
@@ -33,7 +36,7 @@
   with_items:
     - composer
     # - php-pgsql
-    - xdebug
+    - php-xdebug
 
 # - name: phpのPDO拡張(PostgreSQL)を有効にする
 #   lineinfile:

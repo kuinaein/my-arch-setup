@@ -19,11 +19,14 @@
   #   creates: '{{ scoop_dir }}\apps\{{ item }}'
   with_items:
     - jq
+    # - nodejs-lts
     - yarn
+    # - python
     - dotnet-sdk
     - dotnet-host
     - java-runtime
     - graphviz
+    - vagrant
     - docker-compose
 
 - name: PHP開発ツールのインストール

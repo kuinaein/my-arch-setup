@@ -24,7 +24,7 @@
         creates: '{{ scoop_dir }}\apps\git'
 
     - name: Scoop にバケットを登録する
-      win_shell: scoop bucket add extras
+      win_shell: scoop bucket add {{ item }}
       args:
         creates: '{{ scoop_dir }}\buckets\{{ item }}'
       with_items:

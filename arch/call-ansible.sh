@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eux -o pipefail
 SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
-source $SCRIPT_DIR/common.sh
+source $SCRIPT_DIR/../common.sh
 
 if [ -e .env ]; then
   source .env
@@ -22,5 +22,4 @@ $ANSIBLE_PB arch-setup.yml -e ansible_sudo_pass=$ANSIBLE_SUDO_PASS
 date >> $SCRIPT_DIR/user-prefs.log;
 $ANSIBLE_PB arch-user-prefs.yml
 
-echo_info Press enter to continue...
-read
+pause

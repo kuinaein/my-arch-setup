@@ -19,15 +19,17 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
     if (!(Test-Path $ARCH_EXE)) {
         Write-KNNotice -Message 'ArchWSLをインストールします...';
         & $scoop install archwsl;
-        $preSetupSh = ConvertTo-ArchPath -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-arch.sh');
+        [string] $preSetupSh = ConvertTo-ArchPath `
+            -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-arch.sh');
         & $ARCH_EXE run bash $preSetupSh;
     }
 
     [string] $ansible = & $ARCH_EXE run 'pacman -Q ansible 2>/dev/null';
     if (!$ansible) {
         Write-KNNotice -Message 'Ansibleをインストールします...';
-        & $ARCH_EXE run sudo pacman -Syy;
-        & $ARCH_EXE run sudo pacman -S --needed --noconfirm ansible;
+        [string] $ansibleInstallScriptPath = ConvertTo-ArchPath `
+            -WinPath (Join-Path -Path $PSScriptRoot -ChildPath '..\install-ansible.sh');
+        & $ARCH_EXE run sudo $ansibleInstallScriptPath;
     }
 
     # if (!(Get-Command vagrant -ErrorAction Continue)) {
