@@ -1,0 +1,33 @@
+- name: Chromiumをインストールする
+  package: name={{ item }}
+  with_items:
+    - chromium
+    - pepper-flash
+
+- name: Neovimをインストールする
+  package: name=neovim
+
+- name: pamacのAURサポートを有効にする
+  lineinfile:
+    path: /etc/pamac.conf
+    line: '{{ item.line }}'
+    regexp: '{{ item.regexp }}'
+  with_items:
+    - line: EnableAUR
+      regexp: '#?EnableAUR'
+    - line: CheckAURUpdates
+      regexp: '#?CheckAURUpdates'
+
+- name: 等幅フォントとしてNotoフォントを表示させる
+  copy:
+    dest: /etc/fonts/conf.d/51-font-alias.conf
+    src: 51-font-alias.conf
+
+- name: Mozcをインストールする
+  package: name={{ item }}
+  with_items:
+    - fcitx-mozc
+    - fcitx-configtool
+
+- name: Git GUI用のtkをインストールする
+  package: name=tk

@@ -1,0 +1,24 @@
+- name: ホイールスクロールの向きを正方向にする
+  osx_defaults:
+    key: com.apple.swipescrolldirection
+    type: bool
+    value: false
+
+- name: マウスの動きを少し速くする
+  osx_defaults:
+    key: com.apple.mouse.scaling
+    type: float
+    value: 1.0000
+
+- name: 標準のファンクションキーを使用する
+  osx_defaults:
+    key: com.apple.keyboard.fnState
+    type: bool
+    value: true
+
+#   - copy:
+#       dest: '{{ home_dir }}/{{ item }}'
+#       src: '{{ item }}'
+#     with_items:
+#       - .bashrc
+#       - .xprofile

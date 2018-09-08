@@ -1,0 +1,9 @@
+- hosts: all
+  become: ansible_system == 'Linux'
+  # connection はシェルスクリプト等で指定
+  # connection: local
+
+  roles:
+    - common
+    - setup
+    - devtools

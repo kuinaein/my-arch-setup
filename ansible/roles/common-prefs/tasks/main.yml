@@ -1,4 +1,0 @@
-- include: arch-main.yml
-  when: ansible_system != 'Win32NT'
-- include: win-main.yml
-  when: ansible_system == 'Win32NT'

@@ -1,15 +1,15 @@
-- aur: name={{ item }} skip_installed=yes
-  become: no
+- homebrew_cask: name={{ item }}
+  # become: no
   #
   with_items:
-    - visual-studio-code-bin
-    - powershell-bin
+    - visual-studio-code
+    - powershell
 
 - name: Powershellのヘルプを更新する
-  # become: yes
+  become: yes
   shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
   args:
-    executable: /usr/bin/pwsh
+    executable: /usr/local/bin/pwsh
   with_items:
     - ja-JP
     - en-US
@@ -26,13 +26,13 @@
     - graphviz
     - docker-compose
 
-- package: name={{ item }}
+- homebrew_cask: name={{ item }}
   # args:
   #   creates: '{{ scoop_dir }}\apps\{{ item }}'
   with_items:
     - dotnet-sdk
     # - dotnet-host
-    - java-runtime
+    - java
     - vagrant
 
 - name: PHP開発ツールのインストール
@@ -41,19 +41,19 @@
   #
   with_items:
     - composer
-    - php-pgsql
-    - xdebug
+    # - php-pgsql
+    # - xdebug
 
-- name: phpのPDO拡張(PostgreSQL)を有効にする
-  lineinfile:
-    path: /etc/php/php.ini
-    regexp: ^;?extension=pdo_pgsql
-    line: extension=pdo_pgsql
+# - name: phpのPDO拡張(PostgreSQL)を有効にする
+#   lineinfile:
+#     path: /etc/php/php.ini
+#     regexp: ^;?extension=pdo_pgsql
+#     line: extension=pdo_pgsql
 
-#
-- name: Python開発ツールのインストール
-  package: name={{ item }}
-  with_items:
-    - python-pipenv
-    - python-pylint
-    - autopep8
+# TODO pip で入れるのが妥当か？
+# - name: Python開発ツールのインストール
+#   package: name={{ item }}
+#   with_items:
+#     - python-pipenv
+#     - python-pylint
+#     - autopep8

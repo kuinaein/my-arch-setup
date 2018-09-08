@@ -1,4 +1,6 @@
+.DS_Store
+nohup.out
+
 .env
 *.log
 ansible/*.retry
-nohup.out

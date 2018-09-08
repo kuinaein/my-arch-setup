@@ -3,9 +3,9 @@
 ## Antergos
 
 1. sudo arch/pre-setup.sh
-1. 再ログイン
+1. 再ログインして文字化けを直す
 1. すとれりちあ様の DB インスタンスを起動
-1. arch/call-ansible.sh
+1. call-ansible.sh
 1. すとれりちあ様の DB インスタンスを停止
 1. Chromium にログイン
 
@@ -17,6 +17,12 @@
 1. win/user-setup.ps1
 1. win/call-ansible.ps1
 1. Google Chrome にログイン
+
+## Mac
+
+1. mac/pre-setup.sh
+1. call-ansible.sh
+1. Chromium にログイン
 
 ## ライセンス
 

@@ -1,0 +1,8 @@
+- hosts: all
+  become: no
+
+  roles:
+    - common
+    - user-prefs
+    - devtools-prefs
+    # - strelitzia

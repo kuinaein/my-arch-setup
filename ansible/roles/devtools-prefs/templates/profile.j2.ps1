@@ -14,11 +14,21 @@ function prompt() {
 }
 
 #
-# {% if ansible_system != 'Win32NT' %}
+# {% if ansible_os_family != 'Windows' %}
 #
 Remove-Item Alias:ls -ErrorAction SilentlyContinue;
 function ls () {
+    #
+    # {% if ansible_system == 'Linux' %}
+    #
     /usr/bin/ls --color=auto $args;
+    #
+    # {% else %}
+    #
+    /bin/ls -G $args;
+    #
+    # {% endif %}
+    #
 }
 
 Remove-Item Alias:grep -ErrorAction SilentlyContinue;

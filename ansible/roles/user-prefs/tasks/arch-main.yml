@@ -1,3 +1,6 @@
+- name: .sshフォルダを作成する
+  file: path={{ home_dir }}/.ssh state=directory
+
 - name: SSHキーをコピーする
   copy:
     dest: '{{ home_dir }}/.ssh/{{ item.filename }}'

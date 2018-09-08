@@ -6,6 +6,7 @@
     # - powershell-bin
 
 - name: Powershellのヘルプを更新する
+  # become: yes
   win_shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
   # args:
   #   executable: /usr/bin/pwsh
@@ -22,12 +23,17 @@
     - nodejs-lts
     - yarn
     - python
+    - graphviz
+    # - docker-compose
+
+- win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
     - dotnet-sdk
     # - dotnet-host
     - openjdk
-    - graphviz
     - vagrant
-    # - docker-compose
 
 - name: PHP開発ツールのインストール
   win_shell: scoop install {{ item }}

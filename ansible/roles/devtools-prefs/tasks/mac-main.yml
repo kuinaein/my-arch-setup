@@ -19,7 +19,7 @@
 
 - name: Visual Studio Codeの設定を行う
   copy:
-    dest: '{{ home_dir }}/.config/Code/User/{{ item }}'
+    dest: '{{ home_dir }}/Library/Application Support/Code/User/{{ item }}'
     src: vscode-{{ item }}
   with_items:
     - locale.json
@@ -28,7 +28,7 @@
 - name: Powershellの設定フォルダを作成する
   file: state=directory path={{ home_dir }}/{{ item }}
   with_items:
-    # - .config
+    - .config
     - .config/powershell
 
 - name: PowerShellのprofile.ps1を設定する

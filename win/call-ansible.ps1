@@ -22,10 +22,10 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
         -WinPath (Join-Path -Path $PSScriptRoot -ChildPath '..\ansible');
     [string] $ansibleBase = 'env ANSIBLE_LOG_PATH={0} ansible-playbook -v -i {1}' `
         -f ($ansibleDir + '/ansible.log'), ($ansibleDir + '/hosts.yml');
-    [string] $ansibleWin = '{0} -u {1} -e ansible_ssh_pass={2}' `
+    [string] $ansibleWin = '{0} -u {1} -e ansible_ssh_pass={2} -c winrm' `
         -f $ansibleBase, $user, $pass;
 
     & $ARCH_EXE run $ansibleBase -e arch_user=$env:USERNAME ($ansibleDir + '/winarch-setup.yml');
-    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/win-setup.yml');
-    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/win-user-prefs.yml');
+    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/setup.yml');
+    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/user-prefs.yml');
 };
