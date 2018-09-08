@@ -1,3 +1,8 @@
+vscode_config_dir:
+  arch: '{{ home_dir }}/.config/Code/User'
+  mac: '{{ home_dir }}/Library/Application Support/Code/User'
+  win: '{{ home_dir }}/AppData/Roaming/Code/User'
+
 vscode_extensions:
   - ms-ceintl.vscode-language-pack-ja
   - editorconfig.editorconfig

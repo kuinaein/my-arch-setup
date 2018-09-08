@@ -1,1 +1,1 @@
-- include: '{{env_alias}}-os.yml'
+- include: os-{{ env_alias }}.yml

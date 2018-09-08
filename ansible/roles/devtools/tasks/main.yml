@@ -1,1 +1,1 @@
-- include: '{{ env_alias }}-main.yml'
+- include: main-{{ env_alias }}.yml
