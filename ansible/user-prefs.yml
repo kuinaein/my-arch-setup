@@ -1,8 +1,11 @@
 - hosts: all
   become: no
 
+  pre_tasks:
+    - group_by: key={{ env_alias }}
+      changed_when: false
+
   roles:
-    - common
     - user-prefs
     - devtools-prefs
     # - strelitzia

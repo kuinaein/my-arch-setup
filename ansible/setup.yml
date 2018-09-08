@@ -3,7 +3,10 @@
   # become: ansible_system
   # connection: local
 
+  pre_tasks:
+    - group_by: key={{ env_alias }}
+      changed_when: false
+
   roles:
-    - common
     - setup
     - devtools

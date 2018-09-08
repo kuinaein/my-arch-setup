@@ -1,3 +1,10 @@
+# ansible_os_family -> alias
+env_alias_map:
+  Archlinux: arch
+  Windows: win
+  Darwin: mac
+
 ansible_winrm_server_cert_validation: ignore
 
+env_alias: '{{ env_alias_map[ansible_os_family] }}'
 cred_dir: '{{ inventory_dir }}/../../my-credentials/ansible'
