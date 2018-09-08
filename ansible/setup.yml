@@ -1,6 +1,6 @@
 - hosts: all
-  become: ansible_system == 'Linux'
-  # connection はシェルスクリプト等で指定
+  # connection, become はシェルスクリプト等で指定
+  # become: ansible_system
   # connection: local
 
   roles:

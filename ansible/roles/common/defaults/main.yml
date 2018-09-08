@@ -1,5 +1,5 @@
 # ansible_os_family -> alias
 env_alias_map:
-  Arch Linux: arch
+  Archlinux: arch
   Windows: win
   Darwin: mac

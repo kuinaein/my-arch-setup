@@ -23,6 +23,7 @@
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
 
   "files.associations": {
-    "*.gs": "javascript"
+    "*.gs": "javascript",
+    "*.config": "plaintext"
   }
 }

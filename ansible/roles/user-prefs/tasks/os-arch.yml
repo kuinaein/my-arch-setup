@@ -15,7 +15,7 @@
       regexp: ^TriggerKey=
       line: TriggerKey=ZENKAKUHANKAKU
     - subpath: conf/fcitx-clipboard.config
-      regexp: ^#?HistoryLength=5
+      regexp: ^#?HistoryLength=
       line: HistoryLength=16
 
 - name: MATEをダークテーマにする
