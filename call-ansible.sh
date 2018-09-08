@@ -16,10 +16,7 @@ trap 'popd >/dev/null' EXIT
 
 ANSIBLE_PB="env ANSIBLE_LOG_PATH=$PWD/ansible.log ansible-playbook -v -i hosts.yml -c local"
 
-date >> $SCRIPT_DIR/setup.log;
 $ANSIBLE_PB setup.yml -e ansible_sudo_pass=$ANSIBLE_SUDO_PASS
-
-date >> $SCRIPT_DIR/user-prefs.log;
 $ANSIBLE_PB user-prefs.yml
 
 pause
