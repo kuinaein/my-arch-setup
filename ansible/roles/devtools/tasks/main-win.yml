@@ -32,7 +32,7 @@
   with_items:
     - dotnet-sdk
     # - dotnet-host
-    - openjdk
+    - ojdkbuild8 # OpenJDK
     - vagrant
 
 - name: PHP開発ツールのインストール
@@ -57,3 +57,12 @@
 #     - python-pipenv
 #     - python-pylint
 #     - autopep8
+
+- name: Android開発ツールのインストール
+  win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - android-studio
+    # - glfw-x11
+    # - cocos2d-x-src

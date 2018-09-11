@@ -1,2 +1,2 @@
-home_dir: /home/{{ ansible_user }}
+home_dir: /home/{{ ansible_ssh_user }}
 user_bin_dir: '{{ home_dir }}/bin'

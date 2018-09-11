@@ -24,3 +24,6 @@ fi
 
 export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/nvim
+
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle

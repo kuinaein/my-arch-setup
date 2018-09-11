@@ -20,7 +20,7 @@ charset = latin1
 end_of_line = crlf
 
 # 何かあったときにメモ帳で読めないと辛いので
-[ansible/**/win{-*,}.yml]
+[ansible/**/{*-,}win.yml]
 end_of_line = crlf
 
 [{README.md, LICENSE}]

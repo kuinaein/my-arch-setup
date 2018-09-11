@@ -8,6 +8,7 @@
 1. call-ansible.sh
 1. すとれりちあ様の DB インスタンスを停止
 1. Chromium にログイン
+1. Android Studio の SDK Manager で NDK を入れる
 
 ## Windows
 
@@ -23,6 +24,11 @@
 1. mac/pre-setup.sh
 1. call-ansible.sh
 1. Chromium にログイン
+
+## TODO
+
+- Android SDK のセットアップ
+- Android 仮想環境の構築
 
 ## ライセンス
 

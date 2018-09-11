@@ -32,7 +32,7 @@
   with_items:
     - dotnet-sdk
     # - dotnet-host
-    - java
+    - java8
     - vagrant
 
 - name: PHP開発ツールのインストール
@@ -57,3 +57,12 @@
 #     - python-pipenv
 #     - python-pylint
 #     - autopep8
+
+- name: Android開発ツールのインストール
+  homebrew_cask: name={{ item }}
+  # become: no
+  #
+  with_items:
+    - android-studio
+    # - glfw-x11
+    # - cocos2d-x-src
