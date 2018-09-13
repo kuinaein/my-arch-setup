@@ -58,6 +58,14 @@
 #     - python-pylint
 #     - autopep8
 
+- name: Cordovaの依存関係のインストール
+  win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\gradle'
+  with_items:
+    - gradle
+    - ant
+
 - name: Android開発ツールのインストール
   win_shell: scoop install {{ item }}
   args:

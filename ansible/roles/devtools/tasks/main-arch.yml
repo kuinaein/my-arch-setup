@@ -58,6 +58,14 @@
     - python-pylint
     - autopep8
 
+- name: Cordovaの依存関係のインストール
+  package: name={{ item }}
+  # args:
+  #   creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - gradle
+    - ant
+
 - name: Android開発ツールのインストール
   aur: name={{ item }} skip_installed=yes
   become: no

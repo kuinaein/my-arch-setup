@@ -15,6 +15,7 @@ vscode_extensions:
   - dbaeumer.vscode-eslint
   - drknoxy.eslint-disable-snippets
   - esbenp.prettier-vscode
+  - octref.vetur
 
   - ms-python.python
   - shakram02.bash-beautify

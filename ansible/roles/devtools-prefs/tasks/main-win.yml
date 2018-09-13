@@ -35,3 +35,8 @@
   win_template:
     dest: '{{ home_dir }}/Documents/WindowsPowerShell/profile.ps1'
     src: profile.j2.ps1
+
+- yarn: global=yes name={{ item }} executable={{ scoop_dir }}/shims/yarn.exe
+  with_items:
+    - cordova
+    - vue-cli

@@ -26,4 +26,10 @@ export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/nvim
 
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_HOME=$HOME/Android/Sdk
 export NDK_ROOT=$ANDROID_SDK_ROOT/ndk-bundle
+export PATH=$PATH:$ANDROID_HOME/tools
+
+if which yarn >/dev/null; then
+  export PATH=$PATH:$(yarn global bin)
+fi

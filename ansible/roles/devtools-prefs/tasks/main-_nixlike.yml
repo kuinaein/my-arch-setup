@@ -35,3 +35,8 @@
   template:
     dest: '{{ home_dir }}/.config/powershell/profile.ps1'
     src: profile.j2.ps1
+
+- yarn: global=yes name=cordova
+  with_items:
+    - cordova
+    - vue-cli

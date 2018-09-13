@@ -25,11 +25,6 @@
 1. call-ansible.sh
 1. Chromium にログイン
 
-## TODO
-
-- Android SDK のセットアップ
-- Android 仮想環境の構築
-
 ## ライセンス
 
 そんなものありません。
