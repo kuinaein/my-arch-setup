@@ -36,7 +36,17 @@
     dest: '{{ home_dir }}/.config/powershell/profile.ps1'
     src: profile.j2.ps1
 
-- yarn: global=yes name=cordova
+- name: Yarnのバイナリ配置先を取得する
+  shell: yarn global bin
+  register: yarn_bin
+  changed_when: false
+
+# 180916: Ansible 2.6.3 on Mac だとなぜか yarn モジュールがこけるので仕方なくシェルを叩く
+- shell: yarn global add {{ item.pkg }}
+  args:
+    creates: '{{ yarn_bin.stdout }}/{{ item.bin }}'
   with_items:
-    - cordova
-    - vue-cli
+    - pkg: cordova
+      bin: cordova
+    - pkg: vue-cli
+      bin: vue

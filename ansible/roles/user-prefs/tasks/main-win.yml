@@ -1,3 +1,10 @@
+# - copy:
+#     dest: '{{ home_dir }}/{{ item }}'
+#     src: '{{ item }}'
+#   with_items:
+#     - .bash_profile
+#     - .bashrc
+
 - name: .sshフォルダを作成する
   win_file: path={{ home_dir }}/.ssh state=directory
 

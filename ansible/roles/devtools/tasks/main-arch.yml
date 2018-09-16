@@ -72,5 +72,5 @@
   #
   with_items:
     - android-studio
-    - glfw-x11
+    - glfw-x11 # Cocos2d-xのために必要
     - cocos2d-x-src

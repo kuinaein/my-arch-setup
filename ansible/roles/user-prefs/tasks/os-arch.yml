@@ -2,7 +2,6 @@
     dest: '{{ home_dir }}/{{ item }}'
     src: '{{ item }}'
   with_items:
-    - .bashrc
     - .xprofile
 
 - name: fcitxの設定を行う

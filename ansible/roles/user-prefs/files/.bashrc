@@ -6,7 +6,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+if [ "Darwin" = "$(uname -s)"  ]; then
+  LSFLAGS='-G'
+else
+  LSFLAGS='--color=auto'
+fi
+alias ls="ls $LSFLAGS"
+
 alias grep='grep --color=auto'
 
 function parse_git_branch() {
@@ -22,8 +28,10 @@ if [ -e ~/.bashrc.aliases ] ; then
   source ~/.bashrc.aliases
 fi
 
-export BROWSER=/usr/bin/chromium
-export EDITOR=/usr/bin/nvim
+if [ "Darwin" != "$(uname -s)"  ]; then
+  export BROWSER=/usr/bin/chromium
+  export EDITOR=/usr/bin/nvim
+fi
 
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_HOME=$HOME/Android/Sdk

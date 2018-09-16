@@ -36,7 +36,17 @@
     dest: '{{ home_dir }}/Documents/WindowsPowerShell/profile.ps1'
     src: profile.j2.ps1
 
-- yarn: global=yes name={{ item }} executable={{ scoop_dir }}/shims/yarn.exe
+- name: Yarnのバイナリ配置先を取得する
+  shell: '{{ scoop_dir }}/shims/yarn.exe global bin'
+  register: yarn_bin
+  changed_when: false
+
+#
+- shell: '{{ scoop_dir }}/shims/yarn.exe global bin {{ item.pkg }}'
+  args:
+    creates: '{{ yarn_bin.stdout }}/{{ item.bin }}'
   with_items:
-    - cordova
-    - vue-cli
+    - pkg: cordova
+      bin: cordova
+    - pkg: vue-cli
+      bin: vue

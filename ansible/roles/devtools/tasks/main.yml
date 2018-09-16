@@ -1,3 +1,5 @@
 - include: main-{{ env_alias }}.yml
 - include: os-arch.yml
   when: env_alias == 'arch'
+- include: os-mac.yml
+  when: env_alias == 'mac'
