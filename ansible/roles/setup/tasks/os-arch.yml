@@ -1,11 +1,9 @@
-- name: Chromiumをインストールする
-  package: name={{ item }}
+- package: name={{ item }}
   with_items:
+    - neovim
+    - p7zip
     - chromium
     - pepper-flash
-
-- name: Neovimをインストールする
-  package: name=neovim
 
 - name: pamacのAURサポートを有効にする
   lineinfile:
@@ -23,11 +21,12 @@
     dest: /etc/fonts/conf.d/51-font-alias.conf
     src: 51-font-alias.conf
 
-- name: Mozcをインストールする
-  package: name={{ item }}
+- name: unzip日本語ファイル名対応版をインストールする
+  aur: name=unzip-iconv skip_installed=yes
+
+- package: name={{ item }}
   with_items:
     - fcitx-mozc
     - fcitx-configtool
-
-- name: Git GUI用のtkをインストールする
-  package: name=tk
+    - tk # Git GUI用
+    - gimp
