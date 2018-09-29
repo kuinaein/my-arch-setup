@@ -1,2 +1,2 @@
-home_dir: /home/{{ ansible_ssh_user }}
+home_dir: /home/{{ ansible_ssh_user | default(ansible_env.SUDO_USER, true) | default(ansible_env.USER, true) | default(ansible_user_id) }}
 user_bin_dir: '{{ home_dir }}/bin'

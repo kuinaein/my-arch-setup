@@ -4,6 +4,7 @@
     - p7zip
     - chromium
     - pepper-flash
+    - firefox-i18n-ja
 
 - name: pamacのAURサポートを有効にする
   lineinfile:
