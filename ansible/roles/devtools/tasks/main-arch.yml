@@ -44,11 +44,14 @@
     - php-pgsql
     - xdebug
 
-- name: phpのPDO拡張(PostgreSQL)を有効にする
+- name: PHPの拡張を有効にする
   lineinfile:
     path: /etc/php/php.ini
-    regexp: ^;?extension=pdo_pgsql
-    line: extension=pdo_pgsql
+    regexp: ^;?extension={{ item }}
+    line: extension={{ item }}
+  with_items:
+    - pdo_pgsql
+    - iconv
 
 #
 - name: Python開発ツールのインストール

@@ -5,3 +5,7 @@
     state: link
     path: /usr/lib/libtinfo.so.5
     src: /usr/lib/libtinfo.so.6
+
+- name: Spriterのインストール
+  aur: name=spriter-bin skip_installed=yes
+  become: no
