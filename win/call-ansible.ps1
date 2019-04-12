@@ -7,7 +7,7 @@ Remove-Module 'Kuina.PSMySetup' -Force -ErrorAction SilentlyContinue;
 [string] $private:myModulePath = Join-Path -Path $PSScriptRoot -ChildPath 'Kuina.PSMySetup';
 Import-Module $myModulePath
 Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
-    Set-PSEnv;
+    Set-PsEnv;
     [string] $user = $env:ANSIBLE_WINRM_USER;
     [string] $pass = $env:ANSIBLE_WINRM_PASS;
     if (! $pass) {

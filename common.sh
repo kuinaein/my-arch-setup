@@ -8,8 +8,8 @@ function change_console_color () {
 
 function echo_info () {
   change_console_color
-  trap "echo -n $'\e[0m'" RETURN
   echo $*
+  echo -n $'\e[0m'
 }
 
 function pause () {

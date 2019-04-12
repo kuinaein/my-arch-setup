@@ -27,7 +27,6 @@ function install_from_aur () {
     sudo -u $SUDO_USER mkdir -p "$AUR_DIR"
   fi
   pushd "$AUR_DIR" >/dev/null
-  trap "popd >/dev/null" RETURN
 
   if [ -d "$pkg" ]; then
     rm -rf "$pkg"
@@ -36,6 +35,8 @@ function install_from_aur () {
   sudo -u $SUDO_USER -H git clone https://aur.archlinux.org/$pkg.git
   cd $pkg
   sudo -u $SUDO_USER -H makepkg -si --needed --noconfirm
+
+  popd >/dev/null
 }
 
 main

@@ -12,7 +12,7 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
     if (!(Test-Path $scoop)) {
         Write-KNNotice 'scoopをインストールします...';
         Invoke-WithNoDebug {
-            Invoke-Expression (New-object Net.Webclient).DownloadString('https://get.scoop.sh');
+            Invoke-Expression (New-Object Net.Webclient).DownloadString('https://get.scoop.sh');
         };
     }
 
@@ -21,7 +21,8 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
         & $scoop install archwsl;
         [string] $preSetupSh = ConvertTo-ArchPath `
             -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-arch.sh');
-        & $ARCH_EXE run bash $preSetupSh;
+        & $ARCH_EXE run bash $preSetupSh $env:USERNAME;
+        & $ARCH_EXE config --default-user $env:USERNAME;
     }
 
     [string] $ansible = & $ARCH_EXE run 'pacman -Q ansible 2>/dev/null';

@@ -1,5 +1,11 @@
 # 個人用の環境セットアップスクリプト
 
+## 共通
+
+1. `my-setup/../ansible/files`に以下のファイルを置く。
+   - `id_rsa` 秘密鍵
+   - `id_rsa.pub` 公開鍵
+
 ## Antergos
 
 1. sudo arch/pre-setup.sh
