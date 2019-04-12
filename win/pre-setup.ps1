@@ -19,7 +19,7 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
         [string] $username = [WindowsIdentity]::GetCurrent().Name;
         [DirectorySecurity] $acl = Get-Acl -Path $Path;
         [FileSystemAccessRule] $perm = $acl.GetAccessRules($true, $true, [NTAccount]) | `
-            Where-Object {$username -eq $_.IdentityReference.Value} | Select-Object -First 1;
+            Where-Object { $username -eq $_.IdentityReference.Value } | Select-Object -First 1;
         if ($null -eq $perm) {
             [FileSystemAccessRule] $rule = New-Object FileSystemAccessRule @(
                 $username,
@@ -80,7 +80,9 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
     Invoke-WithNoDebug -Block {
         & $script;
     };
-    Set-Item -Force WSMan:\localhost\Client\TrustedHosts -Value '127.0.0.1';
+    Set-Item -Force -Path WSMan:\localhost\Client\TrustedHosts -Value '127.0.0.1';
+    Set-Item -Force -Path WSMan:\localhost\Service\Auth\Basic -Value $true;
+    Set-Item -Force -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true;
 
     Write-Warning -Message '続行する前に再起動することを推奨します' -ErrorAction Continue;
 };
