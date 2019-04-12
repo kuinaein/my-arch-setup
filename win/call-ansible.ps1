@@ -25,7 +25,7 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
     [string] $ansibleWin = '{0} -u {1} -e ansible_ssh_pass={2} -e ansible_ssh_port=5985 -c winrm' `
         -f $ansibleBase, $user, $pass;
 
-    & $ARCH_EXE run $ansibleBase -e arch_user=$env:USERNAME ($ansibleDir + '/winarch-setup.yml');
+    & $ARCH_EXE run $ansibleBase ($ansibleDir + '/winarch-setup.yml');
     & $ARCH_EXE run $ansibleWin ($ansibleDir + '/setup.yml');
     & $ARCH_EXE run $ansibleWin ($ansibleDir + '/user-prefs.yml');
 };

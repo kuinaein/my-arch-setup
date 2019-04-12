@@ -2,24 +2,5 @@
   become: yes
   connection: local
   pre_tasks:
-    - name: パスワード生成
-      shell: openssl passwd -1 {{ arch_user }}
-      register: passwd
-      changed_when: false
-
-    - user:
-        name: '{{ arch_user }}'
-        password: '{{ passwd.stdout }}'
-        shell: /bin/bash
-        append: yes
-        groups:
-          - wheel
-
-    - name: sudo時にパスワードを要求しないようにする
-      copy:
-        dest: /etc/sudoers.d/10-nopasswd
-        src: 10-nopasswd
-        mode: '440'
-
     - name: pywinrmのインストール
       package: name=python-pywinrm
