@@ -19,30 +19,30 @@
   args:
     creates: '{{ scoop_dir }}\apps\{{ item }}'
   with_items:
-    - jq
+    # - jq
     - nodejs-lts
     - yarn
-    - python
-    - graphviz
+    # - python
+    # - graphviz
     # - docker-compose
+#
+# - win_shell: scoop install {{ item }}
+#   args:
+#     creates: '{{ scoop_dir }}\apps\{{ item }}'
+#   with_items:
+#     - dotnet-sdk
+#     # - dotnet-host
+#     - ojdkbuild8 # OpenJDK
+#     - vagrant
 
-- win_shell: scoop install {{ item }}
-  args:
-    creates: '{{ scoop_dir }}\apps\{{ item }}'
-  with_items:
-    - dotnet-sdk
-    # - dotnet-host
-    - ojdkbuild8 # OpenJDK
-    - vagrant
-
-- name: PHP開発ツールのインストール
-  win_shell: scoop install {{ item }}
-  args:
-    creates: '{{ scoop_dir }}\apps\{{ item }}'
-  with_items:
-    - composer
-    # - php-pgsql
-    - php-xdebug
+# - name: PHP開発ツールのインストール
+#   win_shell: scoop install {{ item }}
+#   args:
+#     creates: '{{ scoop_dir }}\apps\{{ item }}'
+#   with_items:
+#     - composer
+#     # - php-pgsql
+#     - php-xdebug
 
 # - name: PHPの拡張を有効にする
 #   lineinfile:
@@ -61,19 +61,19 @@
 #     - python-pylint
 #     - autopep8
 
-- name: Cordovaの依存関係のインストール
-  win_shell: scoop install {{ item }}
-  args:
-    creates: '{{ scoop_dir }}\apps\gradle'
-  with_items:
-    - gradle
-    - ant
+# - name: Cordovaの依存関係のインストール
+#   win_shell: scoop install {{ item }}
+#   args:
+#     creates: '{{ scoop_dir }}\apps\gradle'
+#   with_items:
+#     - gradle
+#     - ant
 
-- name: Android開発ツールのインストール
-  win_shell: scoop install {{ item }}
-  args:
-    creates: '{{ scoop_dir }}\apps\{{ item }}'
-  with_items:
-    - android-studio
-    # - glfw-x11
-    # - cocos2d-x-src
+# - name: Android開発ツールのインストール
+#   win_shell: scoop install {{ item }}
+#   args:
+#     creates: '{{ scoop_dir }}\apps\{{ item }}'
+#   with_items:
+#     - android-studio
+#     # - glfw-x11
+#     # - cocos2d-x-src

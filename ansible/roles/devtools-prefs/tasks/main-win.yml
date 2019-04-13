@@ -35,18 +35,18 @@
   win_template:
     dest: '{{ home_dir }}/Documents/WindowsPowerShell/profile.ps1'
     src: profile.j2.ps1
-
-- name: Yarnのバイナリ配置先を取得する
-  shell: '{{ scoop_dir }}/shims/yarn.exe global bin'
-  register: yarn_bin
-  changed_when: false
-
 #
-- shell: '{{ scoop_dir }}/shims/yarn.exe global bin {{ item.pkg }}'
-  args:
-    creates: '{{ yarn_bin.stdout }}/{{ item.bin }}'
-  with_items:
-    - pkg: cordova
-      bin: cordova
-    - pkg: vue-cli
-      bin: vue
+# - name: Yarnのバイナリ配置先を取得する
+#   shell: '{{ scoop_dir }}/shims/yarn.exe global bin'
+#   register: yarn_bin
+#   changed_when: false
+#
+#
+# - shell: '{{ scoop_dir }}/shims/yarn.exe global add {{ item.pkg }}'
+#   args:
+#     creates: '{{ yarn_bin.stdout }}/{{ item.bin }}'
+#   with_items:
+#     - pkg: cordova
+#       bin: cordova
+#     - pkg: vue-cli
+#       bin: vue

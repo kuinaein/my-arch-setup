@@ -8,17 +8,17 @@ vscode_extensions:
   - editorconfig.editorconfig
   - eamodio.gitlens
   - dotjoshjohnson.xml
-  - jebbs.plantuml
+  # - jebbs.plantuml
   - junsuzuki.theme-japanesque
 
   # JavaScript
   - dbaeumer.vscode-eslint
   - drknoxy.eslint-disable-snippets
   - esbenp.prettier-vscode
-  - octref.vetur
+  # - octref.vetur
 
-  - ms-python.python
+  # - ms-python.python
   - shakram02.bash-beautify
   - ms-vscode.powershell
   - vscoss.vscode-ansible
-  - ms-vscode.csharp
+  # - ms-vscode.csharp

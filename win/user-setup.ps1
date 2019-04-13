@@ -18,6 +18,7 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
 
     if (!(Test-Path $ARCH_EXE)) {
         Write-KNNotice -Message 'ArchWSLをインストールします...';
+        & $scoop bucket add extras;
         & $scoop install archwsl;
         [string] $preSetupSh = ConvertTo-ArchPath `
             -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-arch.sh');
