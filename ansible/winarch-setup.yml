@@ -1,6 +1,0 @@
-- hosts: all
-  become: yes
-  connection: local
-  pre_tasks:
-    - name: pywinrmのインストール
-      package: name=python-pywinrm

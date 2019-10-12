@@ -1,3 +1,0 @@
-- name: ユーザーbinディレクトリを作成する
-  become: no
-  file: state=directory path={{ user_bin_dir }}

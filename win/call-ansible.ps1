@@ -1,5 +1,10 @@
 ﻿#!/usr/bin/env pwsh
-[CmdletBinding()] param([switch]$NoHalt);
+[CmdletBinding(PositionalBinding = $false)]
+param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    [string]$Hosts
+);
 Set-StrictMode -Version Latest;
 $script:ErrorActionPreference = 'Stop';
 
@@ -18,14 +23,12 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
             "ANSIBLE_WINRM_USER=$user`r`nANSIBLE_WINRM_PASS=$pass";
     }
 
-    [string] $ansibleDir = ConvertTo-ArchPath `
+    [string] $ansibleDir = ConvertTo-WslPath `
         -WinPath (Join-Path -Path $PSScriptRoot -ChildPath '..\ansible');
     [string] $ansibleBase = 'env ANSIBLE_LOG_PATH={0} ansible-playbook -v -i {1}' `
-        -f ($ansibleDir + '/ansible.log'), ($ansibleDir + '/hosts.yml');
-    [string] $ansibleWin = '{0} -u {1} -e ansible_ssh_pass={2} -e ansible_ssh_port=5985 -c winrm' `
+        -f ($ansibleDir + '/ansible.log'), (ConvertTo-WslPath -WinPath $Hosts);
+    [string] $ansibleWin = '{0} -u {1} -e ansible_ssh_pass={2}' `
         -f $ansibleBase, $user, $pass;
 
-    & $ARCH_EXE run $ansibleBase ($ansibleDir + '/winarch-setup.yml');
-    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/setup.yml');
-    & $ARCH_EXE run $ansibleWin ($ansibleDir + '/user-prefs.yml');
+    & $UBUNTU_EXE run $ansibleWin ($ansibleDir + '/setup.yml');
 };

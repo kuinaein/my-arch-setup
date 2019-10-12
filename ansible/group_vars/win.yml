@@ -1,4 +1,0 @@
-home_dir: '{{ ansible_env.USERPROFILE }}'
-user_bin_dir: C:\bin
-
-scoop_dir: '{{ home_dir }}\scoop'

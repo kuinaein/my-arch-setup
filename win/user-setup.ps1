@@ -7,39 +7,20 @@ Remove-Module 'Kuina.PSMySetup' -Force -ErrorAction SilentlyContinue;
 [string] $private:myModulePath = Join-Path -Path $PSScriptRoot -ChildPath 'Kuina.PSMySetup';
 Import-Module $myModulePath
 Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
-    [string] $scoopShims = Join-Path -Path $env:USERPROFILE -ChildPath 'scoop\shims';
-    [string] $scoop = Join-Path -Path $scoopShims -ChildPath 'scoop.ps1';
-    if (!(Test-Path $scoop)) {
-        Write-KNNotice 'scoopをインストールします...';
-        Invoke-WithNoDebug {
-            Invoke-Expression (New-Object Net.Webclient).DownloadString('https://get.scoop.sh');
-        };
+    [Microsoft.Windows.Appx.PackageManager.Commands.AppxPackage] `
+        $pkg = Get-AppxPackage -Name $UBUNTU_PKG_NAME;
+    if ($null -eq $pkg) {
+        Write-KNNotice -Message 'Ubuntu 18.04 LTSをインストールします...';
+        [string] $ubuntuPkg = Join-Path -Path $KN_DL_DIR -ChildPath 'ubuntu1804lts.appx';
+        Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile $ubuntuPkg -UseBasicParsing;
+        Add-AppxPackage -Path $ubuntuPkg;
+
+        $pkg = Get-AppxPackage -Name $UBUNTU_PKG_NAME;
+        [string]$ubuntuExe = Get-UbuntuExePath;
+        & $ubuntuExe install --root;
+        [string] $preSetupSh = ConvertTo-WslPath `
+            -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-ubuntu.sh');
+        & $ubuntuExe run bash $preSetupSh $env:USERNAME;
+        & $ubuntuExe config --default-user $env:USERNAME;
     }
-
-    if (!(Test-Path $ARCH_EXE)) {
-        Write-KNNotice -Message 'ArchWSLをインストールします...';
-        & $scoop bucket add extras;
-        & $scoop install archwsl;
-        [string] $preSetupSh = ConvertTo-ArchPath `
-            -WinPath (Join-Path -Path $PSScriptRoot -ChildPath 'pre-setup-arch.sh');
-        & $ARCH_EXE run bash $preSetupSh $env:USERNAME;
-        & $ARCH_EXE config --default-user $env:USERNAME;
-    }
-
-    [string] $ansible = & $ARCH_EXE run 'pacman -Q ansible 2>/dev/null';
-    if (!$ansible) {
-        Write-KNNotice -Message 'Ansibleをインストールします...';
-        [string] $ansibleInstallScriptPath = ConvertTo-ArchPath `
-            -WinPath (Join-Path -Path $PSScriptRoot -ChildPath '..\install-ansible.sh');
-        & $ARCH_EXE run sudo $ansibleInstallScriptPath;
-    }
-
-    # if (!(Get-Command vagrant -ErrorAction Continue)) {
-    #     & $MySetup.'Write-KNNotice'.Script 'vagrantをインストールします...';
-    #     & $MySetup.'Invoke-WithNoDebug'.Script {
-    #         scoop install vagrant;
-    #     }.GetNewClosure();
-    # }
-
-    Write-Warning -Message '続行する前に再起動することを推奨します' -ErrorAction Continue;
 };

@@ -1,2 +1,0 @@
-home_dir: /Users/{{ ansible_user }}
-user_bin_dir: '{{ home_dir }}/bin'

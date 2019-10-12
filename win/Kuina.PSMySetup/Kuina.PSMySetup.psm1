@@ -8,16 +8,29 @@
 # => メソッドとして呼び出そうとするとコマンドレットでなくなるので名前付き引数が使えなくなる
 #    またカスタムオブジェクトからはaliasが取れない. スクリプトでは必要ないだろうが
 
-$script:ErrorActionPreference = 'Stop';
 Set-StrictMode -Version Latest;
+$script:ErrorActionPreference = 'Stop';
 
 
-Set-Variable -Scope Script -Option ReadOnly `
-    -Name ARCH_EXE -Value (Join-Path -Path $env:USERPROFILE -ChildPath 'scoop\shims\arch.ps1');
 Set-Variable -Scope Script -Option ReadOnly `
     -Name KN_BIN_DIR -Value 'C:\bin';
 Set-Variable -Scope Script -Option ReadOnly `
     -Name KN_DL_DIR -Value 'C:\work\dl';
+Set-Variable -Scope Script -Option ReadOnly `
+    -Name UBUNTU_PKG_NAME -Value 'CanonicalGroupLimited.Ubuntu18.04onWindows';
+
+function Get-UbuntuExePath {
+    [CmdletBinding(PositionalBinding = $false)]
+    [OutputType([string])]
+    param()
+    process {
+        [Microsoft.Windows.Appx.PackageManager.Commands.AppxPackage] `
+            $pkg = Get-AppxPackage -Name $UBUNTU_PKG_NAME;
+        if ($null -ne $pkg) {
+            return Join-Path -Path $pkg.InstallLocation -ChildPath 'ubuntu1804.exe';
+        }
+    }
+}
 
 function Write-KNNotice {
     [CmdletBinding(PositionalBinding = $false)]
@@ -27,7 +40,9 @@ function Write-KNNotice {
         [ValidateNotNullOrEmpty()]
         $Message
     );
-    process { Write-Host -Object $Message -ForegroundColor Green; }
+    process {
+        Write-Host -Object $Message -ForegroundColor Green;
+    }
 }
 
 function Set-KNDebugMode {
@@ -69,7 +84,7 @@ function Invoke-WithNoDebug {
 }
 
 
-function ConvertTo-ArchPath {
+function ConvertTo-WslPath {
     [CmdletBinding(PositionalBinding = $false)]
     [OutputType([string])]
     param(
@@ -79,8 +94,9 @@ function ConvertTo-ArchPath {
     );
 
     process {
-        return '/mnt/{0}/{1}' -f $winPath.Substring(0, 1).ToLower(), `
-        ($winPath.Substring(3) -replace '\\', '/');
+        [string] $absPath = Resolve-Path $WinPath
+        return '/mnt/{0}/{1}' -f $absPath.Substring(0, 1).ToLower(), `
+        ($absPath.Substring(3) -replace '\\', '/');
     }
 }
 
@@ -107,5 +123,7 @@ function Invoke-KNMain {
     }
 }
 
+Set-Variable -Scope Script -Option ReadOnly `
+    -Name UBUNTU_EXE -Value (Get-UbuntuExePath);
 
 Export-ModuleMember -Function * -Variable *;

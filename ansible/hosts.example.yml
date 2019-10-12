@@ -1,0 +1,5 @@
+localhost:
+  hosts:
+    127.0.0.1: {}
+  vars:
+    secret_dir: '{{ inventory_dir }}' # SSH秘密鍵のディレクトリへのパス

@@ -1,12 +1,14 @@
 - hosts: all
-  # connection, become はシェルスクリプト等で指定
-  # become: ansible_system
-  # connection: local
+  connection: winrm
+  vars:
+    ansible_ssh_port: 5985
+    ansible_winrm_server_cert_validation: ignore
 
-  pre_tasks:
-    - group_by: key={{ env_alias }}
-      changed_when: false
+    home_dir: '{{ ansible_env.USERPROFILE }}'
+    scoop_dir: C:\bin\scoop
+    java_package: adoptopenjdk-lts-hotspot
+    vscode_data_dir: '{{ scoop_dir }}/persist/vscode-portable/data'
 
   roles:
     - setup
-    - devtools
+    - pref

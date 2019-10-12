@@ -1,5 +1,0 @@
-- name: Google Chromeをインストールする
-  homebrew_cask: name=google-chrome
-
-- name: 本家Gitをインストールする
-  package: name=git

@@ -1,4 +1,0 @@
-- include: main-win.yml
-  when: ansible_os_family == 'Windows'
-- include: main-_nixlike.yml
-  when: ansible_os_family != 'Windows'
