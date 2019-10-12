@@ -6,3 +6,6 @@
   autocrlf = false
   ignorecase = false
   filemode = false
+
+[gui]
+  encoding = utf-8

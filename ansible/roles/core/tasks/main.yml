@@ -1,0 +1,93 @@
+- name: Scoopのインストール先を環境変数として設定
+  win_environment:
+      level: user
+      name: SCOOP
+      value: '{{ scoop_dir }}'
+
+- name: Scoopのインストール
+  win_shell: |
+      Set-StrictMode -Off
+      Invoke-Expression (New-Object Net.Webclient).DownloadString('https://get.scoop.sh')
+  args:
+    creates: '{{ scoop_dir }}'
+
+- name: Gitのインストール
+  win_shell: scoop install git
+  args:
+    creates: '{{ scoop_dir }}\apps\git'
+
+- name: Scoopにバケットを登録
+  win_shell: scoop bucket add {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\buckets\{{ item }}'
+  with_items:
+    - extras
+    - java
+
+- win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - googlechrome
+    - vscode-portable
+
+- name: .sshフォルダを作成する
+  win_file: path={{ home_dir }}/.ssh state=directory
+
+- name: SSHキーをコピーする
+  win_copy:
+    dest: '{{ home_dir }}/.ssh/{{ item }}'
+    src: '{{ secret_dir }}/{{ item }}'
+  with_items:
+    - id_rsa
+    - id_rsa.pub
+
+- name: Gitの設定を行う
+  win_copy:
+    dest: '{{ home_dir }}/.gitconfig'
+    src: .gitconfig
+
+- name: Visual Studio Code拡張のインストール状況を確認する
+  win_find:
+    paths: '{{ vscode_data_dir }}/extensions'
+    patterns: '{{ item }}-*'
+    file_type: directory
+  with_items: '{{ vscode_extensions }}'
+  changed_when: false
+  register: vscodeExt
+
+- name: Visual Studio Code拡張をインストールする
+  win_shell: code --install-extension {{ item.item }}
+  when: 0 == item.matched
+  with_items: '{{ vscodeExt.results }}'
+
+- name: エクスプローラの設定を変更する
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: '{{ item.name }}'
+    data: '{{ item.data }}'
+    type: dword
+  with_items:
+    - name: ShowTaskViewButton
+      data: 0
+    - name: NavPaneExpandToCurrentFolder
+      data: 1
+    - name: HideFileExt
+      data: 0
+    - name: Hidden
+      data: 1
+    # 空のドライブも表示させる
+    - name: HideDrivesWithNoMedia
+      data: 0
+    # 保護されたオペレーティングシステムファイルも表示させる
+    - name: ShowSuperHidden
+      data: 1
+    # コントロールパネル等も表示させる
+    - name: NavPaneShowAllFolders
+      data: 1
+    # チェックボックスを表示させる
+    - name: AutoCheckSelect
+      data: 1
+    # 初期表示フォルダをPCにする
+    - name: LaunchTo
+      data: 1

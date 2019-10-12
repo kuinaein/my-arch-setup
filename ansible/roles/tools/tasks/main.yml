@@ -1,0 +1,26 @@
+- win_shell: scoop install {{ item }}
+  args:
+    creates: '{{ scoop_dir }}\apps\{{ item }}'
+  with_items:
+    - conemu
+    - '{{ java_package }}'
+    - graphviz
+
+- name: 環境変数JAVA_HOMEの設定
+  win_environment:
+      level: user
+      name: JAVA_HOME
+      value: '{{ scoop_dir }}/apps/{{ java_package }}/current'
+
+- name: 環境変数PATHにJavaを追加
+  win_path:
+    scope: user
+    elements:
+      - '%JAVA_HOME%\bin'
+
+- name: Powershellのヘルプを更新する
+  win_shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
+  with_items:
+    - ja-JP
+    - en-US
+  failed_when: false

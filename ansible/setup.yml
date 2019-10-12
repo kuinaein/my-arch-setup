@@ -10,5 +10,6 @@
     vscode_data_dir: '{{ scoop_dir }}/persist/vscode-portable/data'
 
   roles:
-    - setup
+    - core
+    - tools
     - pref
