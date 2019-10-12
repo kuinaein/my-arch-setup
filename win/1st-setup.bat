@@ -1,2 +1,2 @@
-powershell Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+powershell Set-ExecutionPolicy RemoteSigned -Scope Unrestricted
 pause
