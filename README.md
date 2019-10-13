@@ -9,6 +9,7 @@
     - 2019-10-13現在、libsslの更新等でプロンプトが出るが全てyesでOK
 1. `ansible/hosts.example.yml` をコピーして適切に書き換える
 1. `win/call-ansible.ps1 -Host [hosts.ymlのパス]]`
+1. 管理者権限で`win/remove-features.ps1`
 
 ## ライセンス
 

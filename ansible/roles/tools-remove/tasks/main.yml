@@ -11,15 +11,19 @@
     - Microsoft.MicrosoftStickyNotes # 付箋
     # なくても良さそうなもの
     - Microsoft.MicrosoftSolitaireCollection
+    - Microsoft.WebMediaExtensions # Ogg系コーデック
+    - Microsoft.HEVCVideoExtension # iPhone動画のコーデック
     - Microsoft.WindowsSoundRecorder
     - Microsoft.MixedReality.Portal
     - Microsoft.Microsoft3DViewer
     - Microsoft.Getstarted # ヒント
     - Microsoft.WindowsFeedbackHub
     # 明らかに不要なもの
-    - Microsoft.MSPaint # ペイント3D
     - microsoft.windowscommunicationsapps # メールとカレンダー
+    - Microsoft.MSPaint # ペイント3D
+    - Microsoft.Print3D
     - Microsoft.XboxApp # Xbox 本体コンパニオン
+    - Microsoft.Xbox.TCUI # Xbox Live
     - Microsoft.OneConnect # モバイル通信プラン
   changed_when: false
   register: winStoreApp
