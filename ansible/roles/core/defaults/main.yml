@@ -1,15 +1,7 @@
 vscode_extensions:
-  - ms-ceintl.vscode-language-pack-ja
   - editorconfig.editorconfig
-  # - dotjoshjohnson.xml
-  - jebbs.plantuml
-
-  # JavaScript
-  # - dbaeumer.vscode-eslint
-  # - drknoxy.eslint-disable-snippets
-  # - esbenp.prettier-vscode
-  # # - octref.vetur
-
-  # - shakram02.bash-beautify
+  - ms-ceintl.vscode-language-pack-ja
   - ms-vscode.powershell
   - vscoss.vscode-ansible
+
+  - jebbs.plantuml
