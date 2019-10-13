@@ -1,7 +1,0 @@
-vscode_extensions:
-  - editorconfig.editorconfig
-  - ms-ceintl.vscode-language-pack-ja
-  - ms-vscode.powershell
-  - vscoss.vscode-ansible
-
-  - jebbs.plantuml

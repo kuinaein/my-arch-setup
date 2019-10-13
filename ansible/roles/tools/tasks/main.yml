@@ -23,10 +23,3 @@
     scope: user
     elements:
       - '%JAVA_HOME%\bin'
-
-- name: Powershellのヘルプを更新する
-  win_shell: Update-Help -Force -UICulture {{ item }} -ErrorAction Continue
-  with_items:
-    - ja-JP
-    - en-US
-  failed_when: false

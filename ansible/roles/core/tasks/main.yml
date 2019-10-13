@@ -31,10 +31,10 @@
     - googlechrome
     - vscode-portable
 
-- name: .sshフォルダを作成する
+- name: .sshフォルダを作成
   win_file: path={{ home_dir }}/.ssh state=directory
 
-- name: SSHキーをコピーする
+- name: SSHキーをコピー
   win_copy:
     dest: '{{ home_dir }}/.ssh/{{ item }}'
     src: '{{ secret_dir }}/{{ item }}'
@@ -42,26 +42,32 @@
     - id_rsa
     - id_rsa.pub
 
-- name: Gitの設定を行う
+- name: Gitの設定
   win_copy:
     dest: '{{ home_dir }}/.gitconfig'
     src: .gitconfig
 
-- name: Visual Studio Code拡張のインストール状況を確認する
+- name: Visual Studio Code拡張のインストール状況を確認
   win_find:
     paths: '{{ vscode_data_dir }}/extensions'
     patterns: '{{ item }}-*'
     file_type: directory
-  with_items: '{{ vscode_extensions }}'
+  with_items:
+    - editorconfig.editorconfig
+    - ms-ceintl.vscode-language-pack-ja
+    - ms-vscode.powershell
+    - vscoss.vscode-ansible
+
+    - jebbs.plantuml
   changed_when: false
   register: vscodeExt
 
-- name: Visual Studio Code拡張をインストールする
+- name: Visual Studio Code拡張のインストール
   win_shell: code --install-extension {{ item.item }}
   when: 0 == item.matched
   with_items: '{{ vscodeExt.results }}'
 
-- name: エクスプローラの設定を変更する
+- name: エクスプローラの設定を変更
   win_regedit:
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     name: '{{ item.name }}'

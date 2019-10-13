@@ -13,3 +13,6 @@
     - core
     - tools
     - pref
+
+    - tools-update
+    - tools-remove
