@@ -16,11 +16,6 @@
     - virtualbox-np
     - vagrant
 
-- name: Visual Studio Codeの設定
-  win_copy:
-    dest: '{{ vscode_data_dir }}/user-data/User/settings.json'
-    src: vscode-settings.json
-
 - name: 環境変数JAVA_HOMEの設定
   win_environment:
       level: user

@@ -1,0 +1,7 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.renderWhitespace": "all",
+  "files.associations": {
+    "Vagrantfile": "ruby"
+  }
+}

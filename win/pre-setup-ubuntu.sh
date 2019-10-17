@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -eux -o pipefail
-SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
 USER_NAME=$1
 
