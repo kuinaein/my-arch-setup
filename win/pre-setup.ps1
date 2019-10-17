@@ -19,7 +19,7 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
         [string] $username = [WindowsIdentity]::GetCurrent().Name;
         [DirectorySecurity] $acl = Get-Acl -Path $Path;
         [FileSystemAccessRule] $perm = $acl.GetAccessRules($true, $true, [NTAccount]) | `
-            Where-Object { $username -eq $_.IdentityReference.Value } | Select-Object -First 1;
+                Where-Object { $username -eq $_.IdentityReference.Value } | Select-Object -First 1;
         if ($null -eq $perm) {
             [FileSystemAccessRule] $rule = New-Object FileSystemAccessRule @(
                 $username,
@@ -56,21 +56,6 @@ Invoke-KNMain -Verbose:('Continue' -eq $VerbosePreference) -Block {
             Write-Warning 'スクリプト終了後に再起動が必要です' -ErrorAction Continue;
         }
     }
-
-
-    # TODO VirtualBoxもscoopでいける
-    # $binDir = Join-Path -Path $BIN_DIR -ChildPath 'VirtualBox';
-    # if (!(Test-Path $binDir)) {
-    #     Write-KNNotice -Message 'VirtualBoxをインストールします...';
-    #     $installer = Join-Path -Path $DL_DIR -ChildPath '\VirtualBox-5.2.18-124319-Win.exe';
-    #     Invoke-WebRequest -Uri 'https://download.virtualbox.org/virtualbox/5.2.18/VirtualBox-5.2.18-124319-Win.exe' `
-    #         -OutFile $installer;
-    #     $tmpDir = Join-Path -Path $env:TEMP -ChildPath 'vbox_inst';
-    #     & $installer --extract --path $tmpDir --silent;
-    #     $installerPathPattern = Join-Path -Path $tmpDir -ChildPath '*amd64.msi';
-    #     $installer = Get-ChildItem -Path $installerPathPattern | ForEach-Object {$_.FullName};
-    #     & $installer INSTALLDIR=$binDir /passive /norestart;
-    # }
 
 
     Write-KNNotice -Message 'WinRMを設定します...';

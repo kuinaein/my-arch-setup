@@ -22,6 +22,7 @@
     creates: '{{ scoop_dir }}\buckets\{{ item }}'
   with_items:
     - extras
+    - nonportable
     - java
 
 - win_shell: scoop install {{ item }}

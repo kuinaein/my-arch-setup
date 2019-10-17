@@ -13,6 +13,8 @@
     - php
     - composer
     - postgresql
+    - virtualbox-np
+    - vagrant
 
 - name: Visual Studio Codeの設定
   win_copy:
