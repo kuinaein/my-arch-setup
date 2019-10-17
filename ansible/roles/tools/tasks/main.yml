@@ -1,4 +1,6 @@
-- win_shell: scoop install {{ item }}
+- win_shell: |
+    $ProgressPreference = 'SilentlyContinue';
+    scoop install {{ item }};
   args:
     creates: '{{ scoop_dir }}\apps\{{ item }}'
   with_items:
@@ -6,6 +8,11 @@
     - libreoffice-stable
     - '{{ java_package }}'
     - graphviz
+    - nodejs-lts
+    - yarn
+    - php
+    - composer
+    - postgresql
 
 - name: Visual Studio Codeの設定
   win_copy:
@@ -22,4 +29,21 @@
   win_path:
     scope: user
     elements:
-      - '%JAVA_HOME%\bin'
+      # %JAVA_HOME%\binだと毎回変数展開されてchangedになってしまう
+      - '{{ scoop_dir }}/apps/{{ java_package }}/current/bin'
+
+- name: PHP拡張ディレクトリの設定
+  win_lineinfile:
+    path: '{{ scoop_dir }}/persist/php/cli/php.ini'
+    regexp: ^;?extension_dir =
+    line: extension_dir = {{ scoop_dir }}/apps/php/current/ext
+
+- name: PHPの拡張の有効化
+  win_lineinfile:
+    path: '{{ scoop_dir }}/persist/php/cli/php.ini'
+    regexp: ^;?extension={{ item }}
+    line: extension={{ item }}
+  with_items:
+    - openssl
+    - mbstring
+    - pdo_pgsql

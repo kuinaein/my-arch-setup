@@ -59,6 +59,7 @@
     - vscoss.vscode-ansible
 
     - jebbs.plantuml
+    - bmewburn.vscode-intelephense-client
   changed_when: false
   register: vscodeExt
 
